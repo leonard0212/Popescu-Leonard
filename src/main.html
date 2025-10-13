@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Llogo – Bun venit</title>
+  <link rel="stylesheet" href="./styles/site.css">
+  <meta name="description" content="Llogo – identități vizuale și website-uri. Prezentare profesională.">
+  <link rel="stylesheet" href="./styles/presentation.css">
+  <link rel="stylesheet" href="./styles/main.css">
+  <script defer src="./scripts/site.js"></script>
+</head>
+<body>
+  <header class="header" id="header">
+    <nav class="nav">
+      <div class="logo"><img src="./exemplu/assets/llogo.png" alt="Llogo"></div>
+      <ul class="nav-menu">
+        <li><a href="./branduri.html" class="nav-link" data-embed data-embed-default>Branduri</a></li>
+        <li><a href="./website-uri.html" class="nav-link" data-embed>Website-uri</a></li>
+        <li><a href="./foto.html" class="nav-link" data-embed>Foto</a></li>
+        <li><a href="./log_in_page.html" class="nav-link">Log in</a></li>
+      </ul>
+      <button class="contact-btn" onclick="location.href='./contact.html'">Contact</button>
+      <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
+    </nav>
+    <div class="mobile-menu" id="mobile-menu">
+      <div class="mobile-nav">
+        <a href="#branduri" class="nav-link" onclick="toggleMobileMenu()">Branduri</a>
+        <a href="#website-uri" class="nav-link" onclick="toggleMobileMenu()">Website-uri</a>
+        <a href="#foto" class="nav-link" onclick="toggleMobileMenu()">Foto</a>
+        <a href="./log_in_page.html" class="nav-link" onclick="toggleMobileMenu()">Log in</a>
+        <button class="contact-btn" onclick="location.href='./contact.html'">Contact</button>
+      </div>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-text">
+        <h1>
+          <span class="word2">Identități Vizuale</span>
+          <span class="word3">Premium</span>
+          <span class="word4">Pentru</span>
+          <span class="word5">Business-ul tău</span>
+        </h1>
+        <button class="contact-btn" onclick="location.href='./contact.html'">Începe Proiectul</button>
+      </div>
+      <div class="hero-image">
+        <img src="./exemplu/assets/llogo.png" alt="Llogo">
+      </div>
+    </div>
+    <div class="partners-band">
+      <div class="partners-scroll">
+        <img src="./exemplu/assets/partners/airo.png" class="partner-logo" alt="Airo">
+        <img src="./exemplu/assets/partners/cartierDent.png" class="partner-logo" alt="CartierDent">
+        <img src="./exemplu/assets/partners/classlights.png" class="partner-logo" alt="Classlights">
+        <img src="./exemplu/assets/partners/inkstory.png" class="partner-logo" alt="Inkstory">
+      </div>
+    </div>
+  </section>
+
+  <div id="embedded" class="section"></div>
+
+  <footer class="footer">
+    <p>&copy; 2025 Llogo. Toate drepturile rezervate.</p>
+  </footer>
+</body>
+</html>
+
+

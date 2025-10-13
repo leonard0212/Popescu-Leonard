@@ -1,0 +1,4 @@
+/* Page-specific styles for branduri */
+.swiper-slide .card { width: 260px; height: 340px; display: grid; place-items: center; }
+.swiper-pagination-bullet { background: rgba(255,255,255,.5); }
+.swiper-pagination-bullet-active { background: #fff; }

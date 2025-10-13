@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Llogo – Contact</title>
+  <link rel="stylesheet" href="./styles/presentation.css">
+  <link rel="stylesheet" href="./styles/contact.css">
+  <script defer src="./scripts/site.js"></script>
+</head>
+<body>
+  <header class="header" id="header">
+    <nav class="nav">
+      <div class="logo"><img src="./exemplu/assets/llogo.png" alt="Llogo"></div>
+      <ul class="nav-menu">
+        <li><a href="./main.html#branduri" class="nav-link">Branduri</a></li>
+        <li><a href="./website-uri.html" class="nav-link">Website-uri</a></li>
+        <li><a href="./foto.html" class="nav-link">Foto</a></li>
+        <li><a href="./log_in_page.html" class="nav-link">Log in</a></li>
+      </ul>
+      <button class="contact-btn" onclick="location.href='./contact.html'">Contact</button>
+      <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
+    </nav>
+    <div class="mobile-menu" id="mobile-menu">
+      <div class="mobile-nav">
+        <a href="./main.html#branduri" class="nav-link" onclick="toggleMobileMenu()">Branduri</a>
+        <a href="./website-uri.html" class="nav-link" onclick="toggleMobileMenu()">Website-uri</a>
+        <a href="./foto.html" class="nav-link" onclick="toggleMobileMenu()">Foto</a>
+        <a href="./log_in_page.html" class="nav-link" onclick="toggleMobileMenu()">Log in</a>
+        <button class="contact-btn" onclick="location.href='./contact.html'">Contact</button>
+      </div>
+    </div>
+  </header>
+
+  <section class="section" style="padding-top:8rem">
+    <div class="section-title fade-in">
+      <h2>Contact</h2>
+      <p class="section-subtitle">Spune-ne despre proiectul tău.</p>
+    </div>
+    <div class="card">
+      <form class="contact-form" action="#" method="post">
+        <div class="form-row">
+          <div>
+            <label for="name">Nume</label>
+            <input id="name" class="input" type="text" placeholder="Nume complet" required>
+          </div>
+          <div>
+            <label for="email">Email</label>
+            <input id="email" class="input" type="email" placeholder="email@exemplu.com" required>
+          </div>
+        </div>
+        <div class="field" style="margin-top:12px;">
+          <label for="message">Mesaj</label>
+          <textarea id="message" class="input" rows="6" placeholder="Detalii proiect" required></textarea>
+        </div>
+        <button class="btn" type="submit">Trimite</button>
+      </form>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <p>&copy; 2025 Llogo. Toate drepturile rezervate.</p>
+  </footer>
+</body>
+</html>
+
+

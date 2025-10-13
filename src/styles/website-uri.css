@@ -1,0 +1,4 @@
+/* Page-specific styles for website-uri */
+.swiper-slide .card { width: 360px; height: 220px; display: grid; place-items: center; }
+.swiper-pagination-bullet { background: rgba(255,255,255,.5); }
+.swiper-pagination-bullet-active { background: #fff; }
