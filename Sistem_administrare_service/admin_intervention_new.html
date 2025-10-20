@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adaugă Intervenție - Admin ServiceFlow</title>
+    <link rel="stylesheet" href="style/main.css">
+    <link rel="stylesheet" href="style/admin.css">
+</head>
+<body>
+    
+    <div class="admin-wrapper">
+        <aside class="sidebar">
+            <div class="logo-container">
+                <img src="assets/images/logo.png" alt="Logo Service" class="logo">
+            </div>
+            <nav>
+                <ul class="sidebar-nav">
+                    <li><a href="admin_interventions.html" class="active">Gestiune Intervenții</a></li>
+                    <li><a href="index.html">Deconectare</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="admin-content">
+            <header class="admin-header">
+                <h1>Adaugă Intervenție Nouă (Fișă de Service)</h1>
+                <a href="admin_interventions.html" class="btn btn-secondary">Înapoi la Listă</a>
+            </header>
+
+            <section class="admin-form">
+                <form action="#" method="POST">
+                    <div class="form-group">
+                        <label for="client">1. Selectează Clientul</label>
+                        <select id="client" name="client" required>
+                            <option value="">Alege un client...</option>
+                            <option value="1">Popescu Ion</option>
+                            <option value="2">Vasilescu Ana</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="equipment">2. Selectează Echipamentul</label>
+                        <select id="equipment" name="equipment" required>
+                            <option value="">Alege echipamentul clientului...</option>
+                            <option value="1_1">Dacia Logan (B 123 ABC)</option>
+                            <option value="1_2">Ford Focus (B 456 XYZ)</option>
+                        </select>
+                    </div>
+                     <div class="form-group">
+                        <label for="problem">3. Problemă Reclamată de Client</label>
+                        <textarea id="problem" name="problem" rows="3" style="width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 5px; font-size: 1rem;"></textarea>
+                    </div>
+                     <div class="form-group">
+                        <label for="diagnostic">4. Diagnostic Service (Opțional)</label>
+                        <textarea id="diagnostic" name="diagnostic" rows="3" style="width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 5px; font-size: 1rem;"></textarea>
+                    </div>
+                     <div class="form-group">
+                        <label for="parts">5. Piese Folosite (Opțional)</label>
+                        <textarea id="parts" name="parts" rows="4" placeholder="ex: 1 x Filtru ulei (Cod: 123) - 50 RON&#10;1 x Ulei motor 5L (Cod: 456) - 150 RON" style="width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 5px; font-size: 1rem;"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="cost_manopera">6. Cost Manoperă (RON)</label>
+                        <input type="number" id="cost_manopera" name="cost_manopera">
+                    </div>
+                    <div class="form-group">
+                        <label for="status">7. Status Intervenție</label>
+                        <select id="status" name="status" required>
+                            <option value="programata">Programată</option>
+                            <option value="in_desfasurare">În Desfășurare</option>
+                            <option value="finalizata">Finalizată</option>
+                            <option value="anulata">Anulată</option>
+                        </select>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">Salvează Intervenția</button>
+                </form>
+            </section>
+
+        </main>
+    </div>
+
+</body>
+</html>

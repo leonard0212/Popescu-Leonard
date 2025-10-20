@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profilul Meu - Portal Client</title>
+    <link rel="stylesheet" href="style/main.css">
+    <link rel="stylesheet" href="style/client.css">
+</head>
+<body>
+    
+    <div class="client-portal">
+        <aside class="client-nav">
+            <div class="logo-container">
+                <img src="assets/images/logo.png" alt="Logo Service" class="logo">
+            </div>
+            <nav>
+                <ul class="nav-list">
+                    <li><a href="client_dashboard.html">Panoul Meu</a></li>
+                    <li><a href="client_equipment.html">Echipamentele Mele</a></li>
+                    <li><a href="client_booking.html">Programare Online</a></li>
+                    <li><a href="client_history.html">Istoric Service</a></li>
+                    <li><a href="client_profile.html" class="active">Profilul Meu</a></li>
+                    <li><a href="index.html">Deconectare</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="client-content">
+            <header class="client-header">
+                <h1>Profilul Meu</h1>
+                <p>Actualizează-ți datele de contact și parola.</p>
+            </header>
+
+            <form class="booking-form">
+                <div class="form-group">
+                    <label for="nume">Nume Complet</label>
+                    <input type="text" id="nume" name="nume" value="Popescu Ion">
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" value="ion.popescu@email.com">
+                </div>
+
+                <div class="form-group">
+                    <label for="telefon">Telefon</label>
+                    <input type="text" id="telefon" name="telefon" value="0722 123 456">
+                </div>
+                
+                <button type="submit" class="btn btn-primary">Salvează Datele de Contact</button>
+            </form>
+
+            <form class="booking-form" style="margin-top: 2rem;">
+                <h2 style="margin-bottom: 1.5rem;">Schimbare Parolă</h2>
+                <div class="form-group">
+                    <label for="pass_old">Parola Actuală</label>
+                    <input type="password" id="pass_old" name="pass_old">
+                </div>
+                 <div class="form-group">
+                    <label for="pass_new">Parola Nouă</label>
+                    <input type="password" id="pass_new" name="pass_new">
+                </div>
+                 <div class="form-group">
+                    <label for="pass_confirm">Confirmă Parola Nouă</label>
+                    <input type="password" id="pass_confirm" name="pass_confirm">
+                </div>
+                <button type="submit" class="btn btn-secondary">Schimbă Parola</button>
+            </form>
+        </main>
+    </div>
+
+</body>
+</html>

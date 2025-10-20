@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestiune Clienți - Admin ServiceFlow</title>
+    <link rel="stylesheet" href="style/main.css">
+    <link rel="stylesheet" href="style/admin.css">
+</head>
+<body>
+    
+    <div class="admin-wrapper">
+        <aside class="sidebar">
+            <div class="logo-container">
+                <img src="assets/images/logo.png" alt="Logo Service" class="logo">
+            </div>
+            <nav>
+                <ul class="sidebar-nav">
+                    <li><a href="admin_dashboard.html">Dashboard</a></li>
+                    <li><a href="admin_clients.html" class="active">Gestiune Clienți</a></li>
+                    <li><a href="admin_equipment.html">Gestiune Echipamente</a></li>
+                    <li><a href="admin_calendar.html">Calendar Programări</a></li>
+                    <li><a href="admin_interventions.html">Gestiune Intervenții</a></li>
+                    <li><a href="admin_marketing.html">Comunicare & Marketing</a></li>
+                    <li><a href="admin_settings.html">Setări Cont</a></li>
+                    <li><a href="index.html">Deconectare</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="admin-content">
+            <header class="admin-header">
+                <h1>Gestiune Clienți</h1>
+                <a href="admin_client_new.html" class="btn btn-primary">Adaugă Client Nou</a>
+            </header>
+
+            <div class="admin-form" style="margin-bottom: 2rem;">
+                <form>
+                    <div class="form-group">
+                        <label for="search">Caută după nume, telefon sau email</label>
+                        <input type="text" id="search" name="search" placeholder="Introduceți termenul de căutare...">
+                    </div>
+                </form>
+            </div>
+
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Nume Client</th>
+                        <th>Telefon</th>
+                        <th>Email</th>
+                        <th>Nr. Echipamente</th>
+                        <th>Acțiuni</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Popescu Ion</td>
+                        <td>0722 123 456</td>
+                        <td>ion.popescu@email.com</td>
+                        <td>2</td>
+                        <td class="actions">
+                            <a href="admin_client_detail.html">Vezi Detalii</a>
+                            <a href="#" class="delete">Șterge</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Vasilescu Ana</td>
+                        <td>0744 987 654</td>
+                        <td>ana.v@email.com</td>
+                        <td>1</td>
+                        <td class="actions">
+                            <a href="admin_client_detail.html">Vezi Detalii</a>
+                            <a href="#" class="delete">Șterge</a>
+                        </td>
+                    </tr>
+                     </tbody>
+            </table>
+
+        </main>
+    </div>
+
+</body>
+</html>

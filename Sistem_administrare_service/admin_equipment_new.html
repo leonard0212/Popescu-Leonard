@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adaugă Echipament Nou - Admin ServiceFlow</title>
+    <link rel="stylesheet" href="style/main.css">
+    <link rel="stylesheet" href="style/admin.css">
+</head>
+<body>
+    
+    <div class="admin-wrapper">
+        <aside class="sidebar">
+            <div class="logo-container">
+                <img src="assets/images/logo.png" alt="Logo Service" class="logo">
+            </div>
+            <nav>
+                <ul class="sidebar-nav">
+                    <li><a href="admin_dashboard.html">Dashboard</a></li>
+                    <li><a href="admin_clients.html">Gestiune Clienți</a></li>
+                    <li><a href="admin_equipment.html" class="active">Gestiune Echipamente</a></li>
+                    <li><a href="index.html">Deconectare</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="admin-content">
+            <header class="admin-header">
+                <h1>Adaugă Echipament Nou</h1>
+                <a href="admin_equipment.html" class="btn btn-secondary">Înapoi la Listă</a>
+            </header>
+
+            <section class="admin-form">
+                <form action="#" method="POST">
+                    <div class="form-group">
+                        <label for="client">Selectează Clientul</label>
+                        <select id="client" name="client" required>
+                            <option value="">Alege un client...</option>
+                            <option value="1">Popescu Ion</option>
+                            <option value="2">Vasilescu Ana</option>
+                            <option value="3">Logistics SRL</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="model">Model Echipament / Vehicul</label>
+                        <input type="text" id="model" name="model" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="serie">Serie Șasiu / Nr. Înmatriculare</label>
+                        <input type="text" id="serie" name="serie" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="garantie">Data Expirare Garanție (Opțional)</label>
+                        <input type="date" id="garantie" name="garantie" style="width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 5px; font-size: 1rem;">
+                    </div>
+                     <div class="form-group">
+                        <label for="itp">Data Expirare ITP (Opțional)</label>
+                        <input type="date" id="itp" name="itp" style="width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 5px; font-size: 1rem;">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Salvează Echipament</button>
+                </form>
+            </section>
+
+        </main>
+    </div>
+
+</body>
+</html>

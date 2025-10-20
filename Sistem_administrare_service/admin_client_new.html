@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adaugă Client Nou - Admin ServiceFlow</title>
+    <link rel="stylesheet" href="style/main.css">
+    <link rel="stylesheet" href="style/admin.css">
+</head>
+<body>
+    
+    <div class="admin-wrapper">
+        <aside class="sidebar">
+            <div class="logo-container">
+                <img src="assets/images/logo.png" alt="Logo Service" class="logo">
+            </div>
+            <nav>
+                <ul class="sidebar-nav">
+                    <li><a href="admin_dashboard.html">Dashboard</a></li>
+                    <li><a href="admin_clients.html" class="active">Gestiune Clienți</a></li>
+                    <li><a href="admin_equipment.html">Gestiune Echipamente</a></li>
+                    <li><a href="admin_calendar.html">Calendar Programări</a></li>
+                    <li><a href="admin_interventions.html">Gestiune Intervenții</a></li>
+                    <li><a href="admin_marketing.html">Comunicare & Marketing</a></li>
+                    <li><a href="admin_settings.html">Setări Cont</a></li>
+                    <li><a href="index.html">Deconectare</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="admin-content">
+            <header class="admin-header">
+                <h1>Adaugă Client Nou</h1>
+                <a href="admin_clients.html" class="btn btn-secondary">Înapoi la Listă</a>
+            </header>
+
+            <section class="admin-form">
+                <form action="#" method="POST">
+                    <div class="form-group">
+                        <label for="nume">Nume Complet</label>
+                        <input type="text" id="nume" name="nume" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="telefon">Telefon</label>
+                        <input type="text" id="telefon" name="telefon" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email">
+                    </div>
+                     <div class="form-group">
+                        <label for="adresa">Adresă (Opțional)</label>
+                        <input type="text" id="adresa" name="adresa">
+                    </div>
+                    <div class="form-group">
+                        <label for="cui">CUI / CIF (Dacă este companie)</label>
+                        <input type="text" id="cui" name="cui">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Salvează Client</button>
+                </form>
+            </section>
+
+        </main>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Setări Cont - Admin ServiceFlow</title>
+    <link rel="stylesheet" href="style/main.css">
+    <link rel="stylesheet" href="style/admin.css">
+</head>
+<body>
+    
+    <div class="admin-wrapper">
+        <aside class="sidebar">
+            <div class="logo-container">
+                <img src="assets/images/logo.png" alt="Logo Service" class="logo">
+            </div>
+            <nav>
+                <ul class="sidebar-nav">
+                    <li><a href="admin_dashboard.html">Dashboard</a></li>
+                    <li><a href="admin_clients.html">Gestiune Clienți</a></li>
+                    <li><a href="admin_equipment.html">Gestiune Echipamente</a></li>
+                    <li><a href="admin_calendar.html">Calendar Programări</a></li>
+                    <li><a href="admin_interventions.html">Gestiune Intervenții</a></li>
+                    <li><a href="admin_marketing.html">Comunicare & Marketing</a></li>
+                    <li><a href="admin_settings.html" class="active">Setări Cont</a></li>
+                    <li><a href="index.html">Deconectare</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="admin-content">
+            <header class="admin-header">
+                <h1>Setări Cont Service</h1>
+            </header>
+
+            <section class="admin-form" style="margin-bottom: 2rem;">
+                <h2>Profilul Companiei</h2>
+                <form>
+                    <div class="form-group">
+                        <label for="nume_service">Nume Service</label>
+                        <input type="text" id="nume_service" value="Service Auto Rapid SRL">
+                    </div>
+                    <div class="form-group">
+                        <label for="adresa_service">Adresă</label>
+                        <input type="text" id="adresa_service" value="Str. Mecanicilor Nr. 1, București">
+                    </div>
+                    <div class="form-group">
+                        <label for="program">Program de Lucru</label>
+                        <textarea id="program" rows="3" style="width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 5px; font-size: 1rem;">Luni - Vineri: 08:00 - 18:00&#10;Sâmbătă: 09:00 - 13:00</textarea>
+                    </div>
+                     <div class="form-group">
+                        <label for="logo">Logo Companie</label>
+                        <input type="file" id="logo" name="logo">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Salvează Profilul</button>
+                </form>
+            </section>
+            
+            <section class="admin-form" style="margin-bottom: 2rem;">
+                <h2>Gestiune Utilizatori (Angajați)</h2>
+                 <table class="data-table">
+                     <thead>
+                        <tr>
+                            <th>Nume</th>
+                            <th>Email</th>
+                            <th>Rol</th>
+                            <th>Acțiuni</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Admin Service</td>
+                            <td>admin@servicerrapid.ro</td>
+                            <td>Administrator</td>
+                            <td class="actions"><a href="#">Editează</a></td>
+                        </tr>
+                         <tr>
+                            <td>Mihai Popa</td>
+                            <td>mihai@servicerrapid.ro</td>
+                            <td>Mecanic</td>
+                            <td class="actions"><a href="#">Editează</a> <a href="#" class="delete">Șterge</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <a href="#" class="btn btn-secondary" style="margin-top: 1rem;">Adaugă Utilizator Nou</a>
+            </section>
+            
+            <section class="admin-form">
+                <h2>Abonament și Facturare</h2>
+                <p>Planul tău actual este: <strong>Pro</strong> (99 RON/lună)</p>
+                <p>Următoarea factură: 01.11.2025</p>
+                <a href="#" class="btn btn-primary">Gestionează Abonamentul</a>
+            </section>
+
+        </main>
+    </div>
+
+</body>
+</html>

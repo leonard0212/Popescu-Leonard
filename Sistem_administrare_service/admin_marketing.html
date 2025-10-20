@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comunicare & Marketing - Admin ServiceFlow</title>
+    <link rel="stylesheet" href="style/main.css">
+    <link rel="stylesheet" href="style/admin.css">
+</head>
+<body>
+    
+    <div class="admin-wrapper">
+        <aside class="sidebar">
+            <div class="logo-container">
+                <img src="assets/images/logo.png" alt="Logo Service" class="logo">
+            </div>
+            <nav>
+                <ul class="sidebar-nav">
+                    <li><a href="admin_dashboard.html">Dashboard</a></li>
+                    <li><a href="admin_clients.html">Gestiune Clienți</a></li>
+                    <li><a href="admin_equipment.html">Gestiune Echipamente</a></li>
+                    <li><a href="admin_calendar.html">Calendar Programări</a></li>
+                    <li><a href="admin_interventions.html">Gestiune Intervenții</a></li>
+                    <li><a href="admin_marketing.html" class="active">Comunicare & Marketing</a></li>
+                    <li><a href="admin_settings.html">Setări Cont</a></li>
+                    <li><a href="index.html">Deconectare</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="admin-content">
+            <header class="admin-header">
+                <h1>Comunicare & Marketing</h1>
+            </header>
+
+            <section class="admin-form" style="margin-bottom: 2rem;">
+                <h2>Creează o Campanie Nouă (Email / SMS)</h2>
+                <form action="#" method="POST">
+                    <div class="form-group">
+                        <label for="subiect">Subiect Email</label>
+                        <input type="text" id="subiect" name="subiect">
+                    </div>
+                    <div class="form-group">
+                        <label for="audienta">Audiență (Segment Clienți)</label>
+                        <select id="audienta" name="audienta">
+                            <option value="toti">Toți Clienții</option>
+                            <option value="itp_expira">Clienți cu ITP ce expiră în 30 zile</option>
+                            <option value="fara_vizita_6luni">Clienți fără vizită în ultimele 6 luni</option>
+                            <option value="posesori_logan">Clienți cu Dacia Logan</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="mesaj">Conținut Mesaj</label>
+                        <textarea id="mesaj" name="mesaj" rows="10" placeholder="Scrie aici mesajul tău... Poți folosi variabile ca {NUME_CLIENT} sau {MODEL_VEHICUL}." style="width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 5px; font-size: 1rem;"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Trimite Campania</button>
+                </form>
+            </section>
+            
+            <section class="admin-form">
+                <h2>Istoric Campanii</h2>
+                <table class="data-table">
+                     <thead>
+                        <tr>
+                            <th>Data Trimiterii</th>
+                            <th>Subiect</th>
+                            <th>Audiență</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>01.10.2025</td>
+                            <td>Ofertă Specială Anvelope de Iarnă</td>
+                            <td>Toți Clienții</td>
+                            <td style="color: #28a745; font-weight: bold;">Trimisă</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+        </main>
+    </div>
+
+</body>
+</html>
