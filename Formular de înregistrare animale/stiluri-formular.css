@@ -1,0 +1,154 @@
+/* Stiluri generale pentru pagină */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #fef9e7; /* Fundal galben-pai deschis */
+    margin: 0;
+    padding: 40px 20px; /* Spațiu sus/jos și stânga/dreapta */
+}
+
+/* --- STIL NOU PENTRU TITLU --- */
+h1 {
+    text-align: center;
+    color: #e67e22; /* Portocaliu */
+    font-size: 2.5em; /* Mărime mare */
+    font-weight: bold;
+    margin-bottom: 10px; /* Spațiu mic până la paragraf */
+}
+
+/* Stil pentru paragraful introductiv (deasupra containerului) */
+p.intro {
+    text-align: center;
+    font-size: 1em; /* Mărime standard */
+    color: #666; /* Gri închis */
+    margin-bottom: 30px; /* Spațiu mai mare până la formular */
+    max-width: 600px; /* Aceeași lățime ca formularul */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* e. Formularul centrat, cu fundal alb și umbră */
+.form-container {
+    max-width: 600px; 
+    margin: 0 auto; /* Centrează formularul */
+    background-color: #ffffff; 
+    padding: 30px 40px; /* Mai mult spațiu interior */
+    border-radius: 20px; /* Colțuri mult mai rotunjite */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1); /* Umbră ușoară */
+}
+
+/* Gruparea câmpurilor de formular */
+.form-group {
+    margin-bottom: 20px; 
+}
+
+/* Stil comun pentru etichete (label) */
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #333; /* Culoare închisă */
+}
+
+/* e. Câmpurile cu margin și padding consistente */
+input[type="text"],
+input[type="tel"],
+select,
+textarea {
+    width: 100%; 
+    padding: 12px; 
+    border: 1px solid #ccc;
+    border-radius: 4px; /* Colțuri mai puțin rotunjite */
+    box-sizing: border-box; 
+    background-color: #fafafa; /* Un fundal foarte ușor gri */
+}
+
+/* e. Schimbarea culorii bordurii la selectare (focus) */
+input[type="text"]:focus,
+input[type="tel"]:focus,
+select:focus,
+textarea:focus {
+    border-color: #e67e22; /* Bordură portocalie la focus */
+    outline: none; 
+    box-shadow: 0 0 5px rgba(230,126,34,0.3); 
+    background-color: #fff; /* Fundal alb la focus */
+}
+
+/* Stil pentru secțiunile (Sex, Servicii) */
+fieldset {
+    border: 1px solid #e67e22; /* Bordură portocalie */
+    border-radius: 8px; /* Colțuri rotunjite */
+    padding: 15px 20px;
+    margin-top: 10px;
+}
+
+/* Stil pentru titlul secțiunilor (Sex, Servicii) */
+legend {
+    color: #e67e22; /* Culoare portocalie */
+    font-weight: bold;
+    font-size: 1.1em;
+    padding: 0 5px; /* Spațiu în jurul textului */
+    margin-left: -5px; /* Aliniere fină */
+}
+
+/* Stil pentru etichetele radio și checkbox */
+.radio-label, .check-label {
+    display: block; /* Le pune una sub alta */
+    margin-bottom: 12px; /* Spațiu între opțiuni */
+    font-weight: bold; /* Text îngroșat */
+    color: #333;
+}
+
+/* Elimină ultima margine de jos din grupurile de opțiuni */
+.radio-label:last-child,
+.check-label:last-child {
+    margin-bottom: 0;
+}
+
+input[type="radio"], 
+input[type="checkbox"] {
+    margin-right: 8px;
+    vertical-align: middle; 
+    width: 16px; /* Mărește puțin bifa */
+    height: 16px;
+}
+
+/* Containerul pentru butoane */
+.button-group {
+    text-align: center; 
+    margin-top: 30px;
+    border-top: 1px solid #eee; /* Linie separatoare */
+    padding-top: 30px;
+}
+
+/* e. Butoanele cu stiluri comune */
+.btn {
+    padding: 12px 25px; 
+    border: none;
+    border-radius: 4px; /* Aceleași colțuri ca la input-uri */
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    margin: 0 10px; 
+    transition: all 0.3s ease;
+}
+
+/* e. Butonul de trimitere (portocaliu) */
+.btn-submit {
+    background-color: #e67e22; 
+    color: white;
+}
+
+/* e. Butonul de resetare (gri) */
+.btn-reset {
+    background-color: #bdc3c7; 
+    color: white; /* Text alb ca în imagine */
+}
+
+/* e. Efect de hover pe butoane */
+.btn-submit:hover {
+    background-color: #d35400; /* Portocaliu mai închis */
+}
+
+.btn-reset:hover {
+    background-color: #95a5a6; /* Gri mai închis */
+}

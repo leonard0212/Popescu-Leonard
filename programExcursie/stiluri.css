@@ -1,0 +1,96 @@
+/* Stiluri generale pentru întreaga pagină */
+body {
+    font-family: Arial, sans-serif;
+    /* Cerința: Fundal verde deschis */
+    background-color: #e8f5e9; 
+    margin: 0;
+    padding: 20px;
+}
+
+/* Container pentru a centra conținutul */
+.container {
+    max-width: 900px;
+    margin: 20px auto; /* Centrează containerul */
+    /* Cerința: Container transparent */
+    background-color: transparent; 
+    padding: 0;
+    border-radius: 0;
+    box-shadow: none; /* Fără umbră pe container */
+}
+
+/* Titlul */
+h1 {
+    text-align: center;
+    color: #38761d; /* O nuanță de verde mai închis */
+    font-weight: 600;
+}
+
+/* Imaginea (cu chenar alb, ca în exemplul 2) */
+img.excursie-img {
+    display: block; 
+    margin: 25px auto; /* Centrată */
+    width: 90%; 
+    max-width: 500px; /* Mai mică */
+    
+    /* Colțuri rotunjite */
+    border-radius: 10px; 
+    
+
+    /* Umbră discretă */
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2); 
+}
+
+/* Tabelul*/
+table {
+    width: 100%; 
+    margin: 30px auto; 
+    border-collapse: collapse; 
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05); /* Umbră foarte subtilă */
+    overflow: hidden; /* Pentru colțurile rotunjite */
+    border-radius: 5px; 
+}
+
+/* Celulele - Fără borduri vizibile, doar separator jos */
+th, td {
+    border: none;
+    padding: 14px;
+    text-align: left; 
+    border-bottom: 1px solid #e0e0e0; /* Separator gri deschis */
+}
+
+/* Antetul tabelului (verde) */
+thead th {
+    background-color: #b7d7a8; /* Verdele din header-ul tabelului */
+    color: #333; 
+    font-weight: bold;
+    border-bottom: 2px solid #99c185; /* Linie mai groasă sub header */
+}
+
+/* Toate rândurile din corp sunt albe */
+tbody tr {
+    background-color: #ffffff;
+}
+
+/* Eliminăm culorile alternative */
+tbody tr:nth-child(odd) {
+    background-color: #ffffff;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #ffffff;
+}
+
+/* Efect la hover */
+tbody tr:hover {
+    background-color: #f7f7f7; /* Un gri foarte deschis */
+    cursor: pointer; 
+}
+
+/* Paragraf scurt la final */
+p.scop {
+    text-align: center;
+    margin-top: 25px;
+    font-style: italic; 
+    color: #555; 
+    font-size: 0.9em; 
+}
