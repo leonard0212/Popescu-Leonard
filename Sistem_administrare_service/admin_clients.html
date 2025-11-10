@@ -31,55 +31,82 @@
         <main class="admin-content">
             <header class="admin-header">
                 <h1>Gestiune Clienți</h1>
-                <a href="admin_client_new.html" class="btn btn-primary">Adaugă Client Nou</a>
+                <button id="add-client-btn" class="btn btn-primary">Adaugă Client Nou</button>
             </header>
 
             <div class="admin-form" style="margin-bottom: 2rem;">
-                <form>
-                    <div class="form-group">
-                        <label for="search">Caută după nume, telefon sau email</label>
-                        <input type="text" id="search" name="search" placeholder="Introduceți termenul de căutare...">
-                    </div>
-                </form>
+                <div class="form-group">
+                    <label for="client-search-input">Caută după nume, telefon sau email</label>
+                    <input type="text" id="client-search-input" name="search" placeholder="Introduceți termenul de căutare...">
+                </div>
             </div>
 
             <table class="data-table">
                 <thead>
                     <tr>
-                        <th>Nume Client</th>
-                        <th>Telefon</th>
-                        <th>Email</th>
-                        <th>Nr. Echipamente</th>
+                        <th data-sort-key="name">Nume Client</th>
+                        <th data-sort-key="phone">Telefon</th>
+                        <th data-sort-key="email">Email</th>
+                        <th data-sort-key="equipmentCount">Nr. Echipamente</th>
                         <th>Acțiuni</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td>Popescu Ion</td>
-                        <td>0722 123 456</td>
-                        <td>ion.popescu@email.com</td>
-                        <td>2</td>
-                        <td class="actions">
-                            <a href="admin_client_detail.html">Vezi Detalii</a>
-                            <a href="#" class="delete">Șterge</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Vasilescu Ana</td>
-                        <td>0744 987 654</td>
-                        <td>ana.v@email.com</td>
-                        <td>1</td>
-                        <td class="actions">
-                            <a href="admin_client_detail.html">Vezi Detalii</a>
-                            <a href="#" class="delete">Șterge</a>
-                        </td>
-                    </tr>
-                     </tbody>
+                <tbody id="clients-table-body">
+                    <!-- Rândurile vor fi generate dinamic de JavaScript -->
+                </tbody>
             </table>
 
         </main>
     </div>
 
+    <!-- Modal pentru Adăugare Client -->
+    <div id="add-client-modal" class="modal" aria-hidden="true" tabindex="-1">
+        <div class="modal-container" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+            <header class="modal-header">
+                <h2 id="modal-title" class="modal-title">Adaugă Client Nou</h2>
+                <button class="modal-close" aria-label="Închide modal"></button>
+            </header>
+            <main class="modal-content">
+                <form id="add-client-form">
+                    <div class="form-group">
+                        <label for="client-name">Nume Client</label>
+                        <input type="text" id="client-name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="client-phone">Telefon</label>
+                        <input type="tel" id="client-phone" name="phone" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="client-email">Email</label>
+                        <input type="email" id="client-email" name="email" required>
+                    </div>
+                </form>
+            </main>
+            <footer class="modal-footer">
+                <button class="btn btn-secondary" data-micromodal-close>Anulează</button>
+                <button type="submit" form="add-client-form" class="btn btn-primary">Salvează Client</button>
+            </footer>
+        </div>
+    </div>
+
+    <!-- Modal pentru Confirmare Ștergere -->
+    <div id="delete-confirm-modal" class="modal" aria-hidden="true" tabindex="-1">
+        <div class="modal-container" role="dialog" aria-modal="true">
+            <header class="modal-header">
+                <h2 class="modal-title">Confirmare Ștergere</h2>
+                <button class="modal-close" aria-label="Închide modal"></button>
+            </header>
+            <main class="modal-content">
+                <p>Sunteți sigur că doriți să ștergeți acest client? Această acțiune este ireversibilă.</p>
+            </main>
+            <footer class="modal-footer">
+                <button class="btn btn-secondary" data-micromodal-close>Anulează</button>
+                <button id="confirm-delete-btn" class="btn btn-danger">Șterge</button>
+            </footer>
+        </div>
+    </div>
+
     <a href="#top" class="back-to-top" aria-label="Mergi sus">⬆️</a>
+    <script src="js/admin_clients.js"></script>
 </body>
 </html>
