@@ -29,57 +29,85 @@
         </aside>
 
         <main class="admin-content">
-            <header class="admin-header">
-                <h1>Gestiune Clienți</h1>
-                <a href="admin_client_new.html" class="btn btn-primary">Adaugă Client Nou</a>
-            </header>
-
-            <div class="admin-form" style="margin-bottom: 2rem;">
-                <form>
-                    <div class="form-group">
-                        <label for="search">Caută după nume, telefon sau email</label>
-                        <input type="text" id="search" name="search" placeholder="Introduceți termenul de căutare...">
-                    </div>
-                </form>
+            <div class="table-container">
+                <div class="table-header">
+                    <h2>Clienți Existenți</h2>
+                    <input type="text" id="search-clients" placeholder="Caută client...">
+                    <button id="add-client-btn" class="btn btn-primary">Adaugă Client</button>
+                </div>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th data-sort-key="name">Nume <span>▲</span></th>
+                            <th data-sort-key="email">Email <span>▲</span></th>
+                            <th data-sort-key="phone">Telefon <span>▲</span></th>
+                            <th data-sort-key="car">Mașină <span>▲</span></th>
+                            <th data-sort-key="status">Status <span>▲</span></th>
+                            <th>Acțiuni</th>
+                        </tr>
+                    </thead>
+                    <tbody id="clients-table-body">
+                        <!-- Rândurile vor fi generate de JavaScript -->
+                    </tbody>
+                </table>
             </div>
-
-            <table class="data-table">
-                <thead>
-                    <tr>
-                        <th>Nume Client</th>
-                        <th>Telefon</th>
-                        <th>Email</th>
-                        <th>Nr. Echipamente</th>
-                        <th>Acțiuni</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Popescu Ion</td>
-                        <td>0722 123 456</td>
-                        <td>ion.popescu@email.com</td>
-                        <td>2</td>
-                        <td class="actions">
-                            <a href="admin_client_detail.html">Vezi Detalii</a>
-                            <a href="#" class="delete">Șterge</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Vasilescu Ana</td>
-                        <td>0744 987 654</td>
-                        <td>ana.v@email.com</td>
-                        <td>1</td>
-                        <td class="actions">
-                            <a href="admin_client_detail.html">Vezi Detalii</a>
-                            <a href="#" class="delete">Șterge</a>
-                        </td>
-                    </tr>
-                     </tbody>
-            </table>
-
         </main>
     </div>
 
-    <a href="#top" class="back-to-top" aria-label="Mergi sus">⬆️</a>
+    <!-- Add Client Modal -->
+    <div id="add-client-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Adaugă Client Nou</h2>
+                <span class="close-modal">&times;</span>
+            </div>
+            <form id="add-client-form">
+                <div class="form-group">
+                    <label for="name">Nume:</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Telefon:</label>
+                    <input type="tel" id="phone" name="phone" required>
+                </div>
+                <div class="form-group">
+                    <label for="car">Mașină (Licență):</label>
+                    <input type="text" id="car" name="car" required>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Salvează Client</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Delete Client Modal -->
+    <div id="delete-client-modal" class="modal">
+        <div class="modal-content">
+            <h2>Confirmare Ștergere</h2>
+            <p>Sunteți sigur că doriți să ștergeți acest client?</p>
+            <div class="modal-footer">
+                <button id="cancel-delete-btn" class="btn btn-secondary">Anulează</button>
+                <button id="confirm-delete-btn" class="btn btn-danger">Confirmă Ștergerea</button>
+            </div>
+        </div>
+    </div>
+
+    <a href="#top" class="back-to-top" aria-label="Mergi sus">&uarr;</a>
+
+    <!-- Banner Consimțământ Cookie -->
+    <div id="cookie-consent-banner" class="cookie-banner" role="dialog" aria-labelledby="cookie-consent-title" aria-describedby="cookie-consent-text" aria-hidden="true">
+        <p id="cookie-consent-text" class="cookie-banner__text">
+            Acest site folosește cookie-uri pentru a vă oferi o experiență mai bună. Navigând în continuare, sunteți de acord cu <a href="privacy.html">politica noastră de confidențialitate</a>.
+        </p>
+        <button id="cookie-consent-accept" class="btn btn-primary">Am înțeles</button>
+    </div>
+
+    <script src="js/cookie-consent.js"></script>
+    <script src="js/admin_clients.js"></script>
 </body>
 </html>
