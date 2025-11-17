@@ -79,6 +79,12 @@ body {
     border-radius: 5px;
     cursor: pointer;
     font-weight: 500;
+    transition: transform 0.2s ease-out, box-shadow 0.2s ease-out, background-color 0.2s ease;
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 .btn-primary {
@@ -98,10 +104,18 @@ body {
 
 /* --- Hero Section (Homepage) --- */
 .hero {
-    background: #2c3e50;
     color: #fff;
     padding: 6rem 0;
     text-align: center;
+    background: linear-gradient(45deg, #2c3e50, #007bff, #2c3e50);
+    background-size: 200% 200%;
+    animation: gradient-animation 10s ease infinite;
+}
+
+@keyframes gradient-animation {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
 
 .hero h1 {
@@ -361,4 +375,35 @@ body {
 
 .cookie-banner .btn {
     flex-shrink: 0; /* Butonul nu se va micșora */
+}
+
+/* --- Efect de Spotlight (Urmărește Mouse-ul) --- */
+.spotlight-effect {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle, rgba(0, 123, 255, 0.15) 0%, rgba(0, 123, 255, 0) 70%);
+    border-radius: 50%;
+    pointer-events: none; /* Elementul nu va interfera cu mouse-ul */
+    z-index: 9999;
+    transform-origin: center center;
+    will-change: transform;
+    /* Centrarea inițială pe cursor */
+    margin-left: -100px;
+    margin-top: -100px;
+}
+
+/* --- Animații la Derulare --- */
+.animate-on-scroll {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    will-change: opacity, transform;
+}
+
+.animate-on-scroll.is-visible {
+    opacity: 1;
+    transform: translateY(0);
 }
