@@ -30,21 +30,21 @@
                 <p>Aici găsești toate informațiile despre vehiculele și programările tale.</p>
             </header>
 
-            <section class="info-card-grid">
-                <div class="info-card alert">
+            <section class="info-card-grid animate-on-scroll">
+                <div class="info-card alert animate-on-scroll">
                     <h3>Următorul ITP</h3>
                     <div class="data">Expiră în 32 zile</div>
                     <p>Vehicul: Dacia Logan (B 123 ABC)</p>
                     <a href="client_booking.html" class="btn btn-primary" style="margin-top: 10px;">Programează Acum</a>
                 </div>
 
-                <div class="info-card">
+                <div class="info-card animate-on-scroll">
                     <h3>Următoarea Revizie</h3>
                     <div class="data">Peste 4 luni</div>
                     <p>Vehicul: Ford Focus (B 456 XYZ)</p>
                 </div>
 
-                <div class="info-card">
+                <div class="info-card animate-on-scroll">
                     <h3>Puncte Loialitate</h3>
                     <div class="data">120 Puncte</div>
                     <p>Poți beneficia de o reducere de 10%.</p>
@@ -52,6 +52,17 @@
             </section>
         </main>
     </div>
-    <a href="#top" class="back-to-top" aria-label="Mergi sus">⬆️</a>
+    <a href="#top" class="back-to-top" aria-label="Mergi sus">&uarr;</a>
+
+    <!-- Banner Consimțământ Cookie -->
+    <div id="cookie-consent-banner" class="cookie-banner" role="dialog" aria-labelledby="cookie-consent-title" aria-describedby="cookie-consent-text" aria-hidden="true">
+        <p id="cookie-consent-text" class="cookie-banner__text">
+            Acest site folosește cookie-uri pentru a vă oferi o experiență mai bună. Navigând în continuare, sunteți de acord cu <a href="privacy.html">politica noastră de confidențialitate</a>.
+        </p>
+        <button id="cookie-consent-accept" class="btn btn-primary">Am înțeles</button>
+    </div>
+
+    <script src="js/cookie-consent.js"></script>
+    <script src="js/animations.js"></script>
 </body>
 </html>
