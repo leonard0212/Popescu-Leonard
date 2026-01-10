@@ -1,97 +1,72 @@
-
-
-```markdown
 # Popescu-Leonard - ServiceHub
 
-![GitHub](https://img.shields.io/badge/language-PHP-blue)
-![GitHub](https://img.shields.io/badge/database-MySQL-orange)
-![GitHub](https://img.shields.io/badge/docker-enabled-green)
-![License](https://img.shields.io/badge/license-Private-red)
+![PHP](https://img.shields.io/badge/PHP-%3E%3D%207.4-blue?style=flat-square&logo=php)
+![MySQL](https://img.shields.io/badge/MySQL-%3E%3D%205.7-orange?style=flat-square&logo=mysql)
+![Docker](https://img.shields.io/badge/Docker-Enabled-brightgreen?style=flat-square&logo=docker)
+![License](https://img.shields.io/badge/License-Private-red?style=flat-square)
 
 ## 📋 Description
 
 **ServiceHub** is a comprehensive web application for digitizing and managing automotive service operations. It enables businesses to handle client management, online appointment scheduling, automated notifications, and maintain complete service history records.
 
-**Key Tagline:** *Digitize your service. Retain your clients.*
+> **Digitize your service. Retain your clients.**
 
-🌐 **Live Site:** [servicehub.llogo.ro](https://servicehub.llogo.ro)
+🌐 **Live Demo:** [servicehub.llogo.ro](https://servicehub.llogo.ro)
 
 ---
 
 ## ✨ Core Features
 
 ### 📅 Online Appointments
-- 24/7 self-service appointment booking for clients
-- Automated calendar management
-- Appointment reminders and notifications
-- Flexible scheduling system
+* **24/7 Self-Service:** Clients can book appointments anytime.
+* **Calendar Management:** Automated sync and conflict resolution.
+* **Notifications:** Instant alerts for new bookings.
 
-### 🔔 Automated Notifications
-- Automatic reminders for ITP (vehicle inspection), reviews, warranty expiration
-- Client retention through proactive communication
-- No missed appointments or service deadlines
+### 🔔 Automated Retentions
+* **Smart Reminders:** Automatic alerts for ITP (inspections), oil changes, and warranty expirations.
+* **Client Engagement:** Proactive communication to reduce "no-shows".
 
 ### 📁 Digital Service History
-- Complete intervention history for each vehicle
-- Accessible service records anytime, anywhere
-- Detailed maintenance tracking
-- Professional documentation for clients
+* **Cloud Records:** Full intervention history for every vehicle.
+* **Maintenance Tracking:** Detailed logs of parts and labor.
+* **Transparency:** Professional documentation accessible to clients.
 
-### 🎯 Additional Features
-- Secure client authentication and accounts
-- Admin dashboard with operational analytics
-- Equipment and resource management
-- Invoice and payment tracking
-- Marketing and promotional tools
-- Automated cron jobs and processes
-- GDPR compliance with cookie consent
+### 🎯 Business Tools
+* **Admin Dashboard:** Real-time operational analytics.
+* **Resource Management:** Track equipment and workshop availability.
+* **Billing:** Integrated invoice and payment tracking.
+* **GDPR Ready:** Built-in cookie consent and data privacy modules.
 
 ---
 
 ## 🏗️ Project Structure
 
+```text
 Popescu-Leonard/
-├── studenti/                          # Main Application Source (Production Code)
+├── studenti/                          # Main Application Source
 │   ├── index.php                      # Public Landing Page
 │   ├── login.php                      # Client Authentication
 │   ├── signup.php                     # User Registration
-│   ├── logout.php                     # Session Termination
-│   ├── privacy.php                    # Privacy Policy & GDPR
-│   │
 │   ├── admin_dashboard.php            # Administrative Control Panel
-│   ├── admin_calendar.php             # Appointment Scheduling System
-│   ├── admin_clients.php              # Client Relation Management (CRM)
-│   ├── admin_equipment.php            # Inventory & Resource Management
-│   ├── admin_interventions.php        # Service Ticket & Intervention Tracking
-│   ├── admin_invoice.php              # Billing and Invoicing Module
-│   ├── admin_marketing.php            # Marketing & Email Campaigns
-│   ├── admin_automations.php          # Automation Logic & Rules
-│   │
-│   ├── db_connect.php                 # Database Connection Singleton/Module
-│   ├── features.php                   # System Features Overview
-│   ├── cron_process.php               # Background Worker for Scheduled Tasks
-│   ├── setup_automations_db.php       # Automation Database Initializer
-│   │
-│   ├── assets/                        # Static Assets
-│   │   ├── images/                    # UI Assets and Logos
-│   │   ├── js/                        # Frontend Logic (Vanilla JS/Modules)
-│   │   └── style/                     # Stylesheets (Main & Admin themes)
-│   │
-│   ├── footer.php                     # Shared UI Components
+│   ├── admin_calendar.php             # Appointment Scheduling
+│   ├── admin_clients.php              # CRM Module
+│   ├── admin_equipment.php            # Inventory Management
+│   ├── admin_interventions.php        # Service Ticket Tracking
+│   ├── admin_invoice.php              # Billing & Invoicing
+│   ├── admin_marketing.php            # Campaigns & Emailing
+│   ├── admin_automations.php          # Logic & Rules Engine
+│   ├── db_connect.php                 # Database Connection
+│   ├── cron_process.php               # Background Worker Scripts
+│   ├── assets/                        # Static Resources (JS, CSS, Images)
 │   ├── service_flow_db.sql            # Local Schema Backup
-│   ├── README.md                      # App-specific Documentation
-│   └── README_DOCKER.md               # Docker Setup Instructions
-│
-├── queries/                           # SQL Scripts & Database Maintenance
-│   ├── Query.sql                      # General Utility Queries
+│   └── README_DOCKER.md               # Docker Documentation
+├── queries/                           # SQL Scripts & Maintenance
+│   ├── Query.sql                      # Utility Queries
 │   └── service_flow_db.sql            # Master Database Schema
-│
 ├── apache/                            # Web Server Configuration
-│   └── Dockerfile                     # Apache + PHP Environment Definition
-│
-├── docker-compose.yml                 # Docker Orchestration Manifest
-├── README.md                          # Main Repository Documentation
-└── .gitignore                         # Git Exclusion Rules
+│   └── Dockerfile                     # PHP-Apache Environment
+├── docker-compose.yml                 # Container Orchestration
+└── README.md                          # Repository Documentation
 
 ---
 
