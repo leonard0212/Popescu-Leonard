@@ -50,56 +50,48 @@
 
 ## 🏗️ Project Structure
 
-```
 Popescu-Leonard/
-├── studenti/                          # Main PHP application (production code)
-│   ├── index.php                      # Homepage and public interface
-│   ├── login.php                      # Client authentication
-│   ├── signup.php                     # New account registration
-│   ├── logout.php                     # Session termination
-│   ├── privacy.php                    # Privacy policy page
+├── studenti/                          # Main Application Source (Production Code)
+│   ├── index.php                      # Public Landing Page
+│   ├── login.php                      # Client Authentication
+│   ├── signup.php                     # User Registration
+│   ├── logout.php                     # Session Termination
+│   ├── privacy.php                    # Privacy Policy & GDPR
 │   │
-│   ├── admin_dashboard.php            # Admin control panel
-│   ├── admin_calendar.php             # Appointment scheduling system
-│   ├── admin_clients.php              # Client management interface
-│   ├── admin_equipment.php            # Resource management
-│   ├── admin_interventions.php        # Service intervention tracking
-│   ├── admin_invoice.php              # Billing and payment management
-│   ├── admin_marketing.php            # Marketing campaigns
-│   ├── admin_automations.php          # Automated processes and cron jobs
+│   ├── admin_dashboard.php            # Administrative Control Panel
+│   ├── admin_calendar.php             # Appointment Scheduling System
+│   ├── admin_clients.php              # Client Relation Management (CRM)
+│   ├── admin_equipment.php            # Inventory & Resource Management
+│   ├── admin_interventions.php        # Service Ticket & Intervention Tracking
+│   ├── admin_invoice.php              # Billing and Invoicing Module
+│   ├── admin_marketing.php            # Marketing & Email Campaigns
+│   ├── admin_automations.php          # Automation Logic & Rules
 │   │
-│   ├── db_connect.php                 # Database connection module
-│   ├── features.php                   # System features page
-│   ├── cron_process.php               # Automated background processes
-│   ├── setup_automations_db.php       # Initial automation setup
+│   ├── db_connect.php                 # Database Connection Singleton/Module
+│   ├── features.php                   # System Features Overview
+│   ├── cron_process.php               # Background Worker for Scheduled Tasks
+│   ├── setup_automations_db.php       # Automation Database Initializer
 │   │
-│   ├── assets/
-│   │   ├── images/                    # Logo and UI images
-│   │   ├── js/                        # JavaScript functionality
-│   │   │   ├── cookie-consent.js      # Cookie consent banner
-│   │   │   └── admin_clients.js       # Client interface interactions
-│   │   └── style/                     # CSS stylesheets
-│   │       ├── main.css               # Primary styles
-│   │       └── admin.css              # Admin panel styles
+│   ├── assets/                        # Static Assets
+│   │   ├── images/                    # UI Assets and Logos
+│   │   ├── js/                        # Frontend Logic (Vanilla JS/Modules)
+│   │   └── style/                     # Stylesheets (Main & Admin themes)
 │   │
-│   ├── footer.php                     # Shared footer component
-│   ├── service_flow_db.sql            # Database schema
-│   ├── README.md                      # Project documentation
-│   └── README_DOCKER.md               # Docker setup guide
+│   ├── footer.php                     # Shared UI Components
+│   ├── service_flow_db.sql            # Local Schema Backup
+│   ├── README.md                      # App-specific Documentation
+│   └── README_DOCKER.md               # Docker Setup Instructions
 │
-├── queries/                           # SQL database files
-│   ├── Query.sql                      # General database queries
-│   ├── Query_1.sql                    # Additional SQL scripts
-│   └── service_flow_db.sql            # Complete database schema
+├── queries/                           # SQL Scripts & Database Maintenance
+│   ├── Query.sql                      # General Utility Queries
+│   └── service_flow_db.sql            # Master Database Schema
 │
-├── apache/                            # Docker configuration
-│   └── Dockerfile                     # Apache + PHP container setup
+├── apache/                            # Web Server Configuration
+│   └── Dockerfile                     # Apache + PHP Environment Definition
 │
-├── docker-compose.yml                 # Docker Compose orchestration
-├── README.md                          # This file
-└── .gitignore                         # Git exclusion rules
-
-```
+├── docker-compose.yml                 # Docker Orchestration Manifest
+├── README.md                          # Main Repository Documentation
+└── .gitignore                         # Git Exclusion Rules
 
 ---
 
