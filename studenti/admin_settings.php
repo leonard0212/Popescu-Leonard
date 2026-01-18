@@ -17,6 +17,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update_profile'])) {
     $service_name = trim($_POST['service_name']);
     $email = trim($_POST['email']);
     $cui = trim($_POST['cui']);
+    $address = trim($_POST['address'] ?? '');
+    $fiscal_address = trim($_POST['fiscal_address'] ?? '');
+    $vat_default = isset($_POST['vat_default']) ? (float)$_POST['vat_default'] : null;
 
     if(empty($service_name) || empty($email)) {
         $msg = "Numele service-ului și Email-ul sunt obligatorii.";
@@ -53,6 +56,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update_profile'])) {
             $sql .= ", logo_path = ?";
             $params[] = $logo_path;
             $types .= "s";
+        }
+        // fiscal fields
+        $sql .= ", address = ?, fiscal_address = ?";
+        $params[] = $address;
+        $params[] = $fiscal_address;
+        $types .= "ss";
+        if ($vat_default !== null) {
+            $sql .= ", vat_rate_default = ?";
+            $params[] = $vat_default;
+            $types .= "d";
         }
         $sql .= " WHERE id = ?";
         $params[] = $admin_id;
@@ -109,7 +122,7 @@ $user = $stmt->get_result()->fetch_assoc();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Setări Cont - Admin ServiceHub</title>
+    <title>Setări Cont - Admin ServiceFlow</title>
     <link rel="stylesheet" href="style/main.css">
     <link rel="stylesheet" href="style/admin.css">
 </head>
@@ -120,17 +133,18 @@ $user = $stmt->get_result()->fetch_assoc();
 
         <main class="admin-content">
             <header class="admin-header animate-on-scroll">
-                <button id="sidebar-toggle" class="sidebar-toggle" style="display: none; background: none; border: none; font-size: 1.5rem; cursor: pointer; margin-right: 1rem;">&#9776;</button>
+                <button id="sidebar-toggle" class="sidebar-toggle">&#9776;</button>
                 <h1>Setări Cont Service</h1>
             </header>
 
             <?php if($msg): ?>
-                <div style="padding: 15px; margin-bottom: 20px; border-radius: 5px; color: white; background-color: <?php echo ($msg_type == 'success') ? '#28a745' : '#dc3545'; ?>;">
+                    <div class="form-alert <?php echo ($msg_type == 'success') ? 'alert-success' : 'alert-danger'; ?>">
                     <?php echo $msg; ?>
                 </div>
             <?php endif; ?>
 
-            <section class="admin-form animate-on-scroll" style="margin-bottom: 2rem;">
+            <section class="admin-form animate-on-scroll mb-2">
+                
                 <h2>Profilul Companiei</h2>
                 <form action="" method="POST" enctype="multipart/form-data">
                     <input type="hidden" name="update_profile" value="1">
@@ -150,11 +164,26 @@ $user = $stmt->get_result()->fetch_assoc();
                         <input type="text" id="cui" name="cui" value="<?php echo htmlspecialchars($user['cui_cif']); ?>">
                     </div>
 
+                        <div class="form-group">
+                            <label for="address">Adresă Sediu</label>
+                            <input type="text" id="address" name="address" value="<?php echo htmlspecialchars($user['address'] ?? ''); ?>">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="fiscal_address">Adresă Fiscală (dacă diferă)</label>
+                            <input type="text" id="fiscal_address" name="fiscal_address" value="<?php echo htmlspecialchars($user['fiscal_address'] ?? ''); ?>">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="vat_default">TVA Implicit (%)</label>
+                            <input type="number" step="0.01" id="vat_default" name="vat_default" value="<?php echo htmlspecialchars($user['vat_rate_default'] ?? '19.00'); ?>">
+                        </div>
+
                     <div class="form-group">
                         <label for="logo">Logo Companie (Opțional)</label>
                         <?php if(!empty($user['logo_path'])): ?>
-                            <div style="margin-bottom: 10px;">
-                                <img src="<?php echo htmlspecialchars($user['logo_path']); ?>" alt="Logo Curent" style="max-height: 80px; border: 1px solid #ddd; padding: 5px; border-radius: 4px;">
+                            <div class="mb-2">
+                                <img src="<?php echo htmlspecialchars($user['logo_path']); ?>" alt="Logo Curent" class="logo-preview">
                             </div>
                         <?php endif; ?>
                         <input type="file" id="logo" name="logo" accept="image/png, image/jpeg, image/jpg">
@@ -165,7 +194,7 @@ $user = $stmt->get_result()->fetch_assoc();
                 </form>
             </section>
 
-            <section class="admin-form animate-on-scroll" style="margin-bottom: 2rem;">
+            <section class="admin-form animate-on-scroll mb-2">
                 <h2>Schimbare Parolă</h2>
                 <form action="" method="POST">
                     <input type="hidden" name="update_password" value="1">
@@ -181,11 +210,12 @@ $user = $stmt->get_result()->fetch_assoc();
                 </form>
             </section>
 
-            <section class="admin-form animate-on-scroll" style="margin-bottom: 2rem;">
+            <section class="admin-form animate-on-scroll mb-2">
                 <h2>Abonament și Facturare</h2>
                 <div style="background: #f8f9fa; padding: 15px; border-radius: 5px; border-left: 5px solid #007bff;">
-                    <p>Tip Abonament: <strong style="text-transform: uppercase; color: #007bff;">Standard (ServiceHub PRO)</strong></p>
-                    <p>Status: <span style="color: green; font-weight: bold;">Activ</span></p>
+                <div class="box-info">
+                    <p>Tip Abonament: <strong class="text-primary uppercase">Standard (ServiceFlow PRO)</strong></p>
+                    <p>Status: <span class="status-active">Activ</span></p>
                     <p><small>Acesta este planul unic pentru toate service-urile partenere.</small></p>
                 </div>
             </section>

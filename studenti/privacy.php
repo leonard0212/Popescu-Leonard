@@ -8,7 +8,7 @@ session_start();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Politica de Confidențialitate - ServiceHub</title>
+    <title>Politica de Confidențialitate - ServiceFlow</title>
     <link rel="stylesheet" href="style/main.css">
     <style>
         /* Stiluri specifice pentru pagini de text (Privacy, Terms) */
@@ -49,7 +49,7 @@ session_start();
     <header class="navbar">
         <div class="container">
             <a href="index.php">
-                <img src="assets/images/logo.png" alt="ServiceHub Logo" class="logo">
+                <img src="assets/images/logo.png" alt="ServiceFlow Logo" class="logo">
             </a>
             <nav>
                 <ul class="nav-links">
@@ -77,7 +77,7 @@ session_start();
                 <p class="last-updated">Ultima actualizare: <?php echo date("d.m.Y"); ?></p>
 
                 <h2>1. Introducere</h2>
-                <p>Confidențialitatea datelor dumneavoastră este importantă pentru noi. Această politică explică modul în care ServiceHub colectează, utilizează și protejează informațiile personale ale utilizatorilor.</p>
+                <p>Confidențialitatea datelor dumneavoastră este importantă pentru noi. Această politică explică modul în care ServiceFlow colectează, utilizează și protejează informațiile personale ale utilizatorilor.</p>
 
                 <h2>2. Datele pe care le colectăm</h2>
                 <p>Putem colecta următoarele tipuri de informații:</p>

@@ -109,7 +109,7 @@ $current_smtp = $stmt_current_smtp->get_result()->fetch_assoc();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Automatizări Inteligente - ServiceHub</title>
+    <title>Automatizări Inteligente - ServiceFlow</title>
     <link rel="stylesheet" href="style/main.css">
     <link rel="stylesheet" href="style/admin.css">
     <style>
@@ -201,7 +201,7 @@ $current_smtp = $stmt_current_smtp->get_result()->fetch_assoc();
 
         <main class="admin-content">
             <header class="admin-header animate-on-scroll">
-                <button id="sidebar-toggle" class="sidebar-toggle" style="display: none; background: none; border: none; font-size: 1.5rem; cursor: pointer; margin-right: 1rem;">&#9776;</button>
+                <button id="sidebar-toggle" class="sidebar-toggle">&#9776;</button>
                 <h1>Automatizări Inteligente</h1>
             </header>
 

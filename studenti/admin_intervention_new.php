@@ -45,6 +45,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $stmt->bind_param("iisssdss", $client_id, $equipment_id, $problem, $diagnostic, $parts, $cost, $status, $date);
 
                 if ($stmt->execute()) {
+                    $new_id = $stmt->insert_id;
+                    // If created with status finalizata, award loyalty points immediately
+                    if ($status === 'finalizata') {
+                        $labor_val = isset($cost) ? (float)$cost : 0.0;
+                        $points = floor($labor_val / 10);
+                        if ($points > 0) {
+                            $upd = $conn->prepare("UPDATE clients SET loyalty_points = IFNULL(loyalty_points,0) + ? WHERE id = ?");
+                            if ($upd) { $upd->bind_param('ii', $points, $client_id); $upd->execute(); }
+                        }
+                        // mark intervention as points awarded
+                        $mark = $conn->prepare("UPDATE interventions SET points_awarded = 1 WHERE id = ?");
+                        if ($mark) { $mark->bind_param('i', $new_id); $mark->execute(); }
+                    }
+
                     header("Location: admin_interventions.php");
                     exit();
                 } else {
@@ -81,7 +95,7 @@ while($row = $equipment->fetch_assoc()) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Adaugă Intervenție - ServiceHub</title>
+    <title>Adaugă Intervenție - ServiceFlow</title>
     <link rel="stylesheet" href="style/main.css">
     <link rel="stylesheet" href="style/admin.css">
 </head>
@@ -91,7 +105,7 @@ while($row = $equipment->fetch_assoc()) {
 
         <main class="admin-content">
             <header class="admin-header animate-on-scroll">
-                <button id="sidebar-toggle" class="sidebar-toggle" style="display: none; background: none; border: none; font-size: 1.5rem; cursor: pointer; margin-right: 1rem;">&#9776;</button>
+                <button id="sidebar-toggle" class="sidebar-toggle">&#9776;</button>
                 <h1>Fișă Service Nouă</h1>
                 <a href="admin_interventions.php" class="btn btn-secondary">Înapoi la Listă</a>
             </header>

@@ -153,7 +153,7 @@ if ($pending_stmt) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard - Admin ServiceHub</title>
+    <title>Dashboard - Admin ServiceFlow</title>
     <link rel="stylesheet" href="style/main.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" href="style/admin.css">
 </head>
@@ -164,7 +164,7 @@ if ($pending_stmt) {
 
         <main class="admin-content">
             <header class="admin-header animate-on-scroll">
-                <button id="sidebar-toggle" class="sidebar-toggle" style="display: none; background: none; border: none; font-size: 1.5rem; cursor: pointer; margin-right: 1rem;">&#9776;</button>
+                <button id="sidebar-toggle" class="sidebar-toggle">&#9776;</button>
                 <h1>Dashboard</h1>
                 <nav class="user-info">
                     <span>Bun venit, <?php echo htmlspecialchars($service_name); ?>!</span>
@@ -175,19 +175,19 @@ if ($pending_stmt) {
             <section class="dashboard-widgets animate-on-scroll">
                 <div class="widget animate-on-scroll">
                     <h3>Programări Astăzi</h3>
-                    <div class="value"><?php echo $programari_azi; ?></div>
+                    <div class="value"><a href="admin_interventions.php?filter=today" style="text-decoration:none; color:inherit"><?php echo $programari_azi; ?></a></div>
                 </div>
                 <div class="widget animate-on-scroll">
                     <h3>Vehicule în Service</h3>
-                    <div class="value"><?php echo $vehicule_service; ?></div>
+                    <div class="value"><a href="admin_interventions.php?filter=in_desfasurare" style="text-decoration:none; color:inherit"><?php echo $vehicule_service; ?></a></div>
                 </div>
                 <div class="widget animate-on-scroll">
                     <h3>Clienți Noi (Luna)</h3>
-                    <div class="value"><?php echo $clienti_noi; ?></div>
+                    <div class="value"><a href="admin_clients.php?filter=new_month" style="text-decoration:none; color:inherit"><?php echo $clienti_noi; ?></a></div>
                 </div>
                 <div class="widget animate-on-scroll">
                     <h3>ITP-uri ce Expiră (30 zile)</h3>
-                    <div class="value" style="color: #ffc107;"><?php echo $itp_expira; ?></div>
+                    <div class="value" style="color: #ffc107;"><a href="admin_equipment.php?filter=itp_expiring" style="text-decoration:none; color:inherit"><?php echo $itp_expira; ?></a></div>
                 </div>
             </section>
 

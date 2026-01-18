@@ -6,8 +6,13 @@ services:
     container_name: lamp_apache
     volumes:
       - ./studenti:/var/www/html
+    environment:
+      - DB_HOST=mysql
+      - DB_USER=user
+      - DB_PASS=password
+      - DB_NAME=service_flow_db
     ports:
-      - "8080:80"
+      - "8081:80"
     depends_on:
       - mysql
 
@@ -17,7 +22,7 @@ services:
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: studenti
+      MYSQL_DATABASE: service_flow_db
       MYSQL_USER: user
       MYSQL_PASSWORD: password
     ports:

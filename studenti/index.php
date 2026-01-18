@@ -8,7 +8,7 @@ session_start();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ServiceHub - Digitalizează-ți Service-ul</title>
+    <title>ServiceFlow - Digitalizează-ți Service-ul</title>
     <link rel="stylesheet" href="style/main.css">
 </head>
 <body id="top">
@@ -16,7 +16,7 @@ session_start();
     <header class="navbar">
         <div class="container">
             <a href="index.php">
-                <img src="assets/images/logo.png" alt="ServiceHub Logo" class="logo">
+                <img src="assets/images/logo.png" alt="ServiceFlow Logo" class="logo">
             </a>
             <nav>
                 <ul class="nav-links">
@@ -55,22 +55,22 @@ session_start();
 
         <section class="section animate-on-scroll">
             <div class="container">
-                <h2 class="section-title animate-on-scroll">De ce ServiceHub?</h2>
+                <h2 class="section-title animate-on-scroll">De ce ServiceFlow?</h2>
                 <div class="features-grid animate-on-scroll">
                     <div class="feature-card animate-on-scroll">
-                        <div style="font-size: 3rem; margin-bottom: 10px;"><i class="fas fa-calendar-alt"></i></div>
+                            <div class="icon-large"><i class="fas fa-calendar-alt"></i></div>
                         
                         <h3>Programări Online</h3>
                         <p>Permite clienților să se programeze singuri, 24/7, reducând munca la recepție.</p>
                     </div>
                     <div class="feature-card animate-on-scroll">
-                        <div style="font-size: 3rem; margin-bottom: 10px;"><i class="fas fa-bell"></i></div>
+                        <div class="icon-large"><i class="fas fa-bell"></i></div>
                         
                         <h3>Notificări Automate</h3>
                         <p>Trimite automat remindere pentru ITP, revizii sau expirarea garanției. Nu mai uita niciun client.</p>
                     </div>
                     <div class="feature-card animate-on-scroll">
-                        <div style="font-size: 3rem; margin-bottom: 10px;"><i class="fas fa-folder-open"></i></div>
+                        <div class="icon-large"><i class="fas fa-folder-open"></i></div>
                         
                         <h3>Istoric Digital</h3>
                         <p>Păstrează un istoric complet al intervențiilor pentru fiecare vehicul, accesibil oricând.</p>

@@ -46,7 +46,7 @@ if (!empty($search)) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestiune Clienți - Admin ServiceHub</title>
+    <title>Gestiune Clienți - Admin ServiceFlow</title>
     <link rel="stylesheet" href="style/main.css">
     <link rel="stylesheet" href="style/admin.css">
 </head>
@@ -56,7 +56,7 @@ if (!empty($search)) {
 
         <main class="admin-content">
             <header class="admin-header animate-on-scroll">
-                <button id="sidebar-toggle" class="sidebar-toggle" style="display: none; background: none; border: none; font-size: 1.5rem; cursor: pointer; margin-right: 1rem;">&#9776;</button>
+                <button id="sidebar-toggle" class="sidebar-toggle">&#9776;</button>
                 <h1>Gestiune Clienți</h1>
             </header>
 

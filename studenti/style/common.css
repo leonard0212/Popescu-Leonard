@@ -1,0 +1,254 @@
+/* Common shared variables and base styles */
+@import url('https://fonts.googleapis.com/css2?family=Onest:wght@400;500;700&display=swap');
+
+/* Reset and box-sizing applied globally to ensure consistent layout */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-color: #007bff;
+    --secondary-color: #6c757d;
+    --secondary-dark: #5a6268;
+    --success-color: #28a745;
+    --warning-color: #ffc107;
+    --danger-color: #dc3545;
+    --light-bg: #f9f9f9;
+    --dark-text: #333333;
+    --sidebar-bg: #2c3e50;
+    --sidebar-text: #ecf0f1;
+    --sidebar-hover: #34495e;
+    --border-color: #ddd;
+    --border-contrast: #ccc;
+    --muted: #666666;
+    --muted-2: #aaaaaa;
+    --muted-light: #f4f7f6;
+    --surface: #ffffff;
+    --brand-dark: #2c3e50;
+    --primary-dark: #0056b3;
+    --link-cta: #00aaff;
+    --indigo: #4f46e5;
+    --success-bg: #d4edda;
+    --danger-bg: #f8d7da;
+    --warning-bg: #fff3cd;
+    --info-bg: #cce5ff;
+    --filter-bg: #eef2ff;
+    --muted-lighter: #fafafa;
+    --muted-3: #888888;
+    --success-text: #155724;
+    --danger-text: #721c24;
+    --warning-text: #856404;
+    --info-text: #004085;
+    --bg-gradient-1: #f4f7f6;
+    --bg-gradient-2: #e9f1f8;
+    --shadow-md: 0 2px 10px rgba(0,0,0,0.1);
+    /* Accent palette used by feature illustrations */
+    --accent-amber: #ff9800;
+    --accent-green: #4caf50;
+    --accent-purple: #9c27b0;
+    --accent-cyan: #00bcd4;
+    --accent-red: #f44336;
+    --accent-blue-bg: #e3f2fd;
+    --accent-purple-bg: #f3e5f5;
+    --accent-cyan-bg: #e0f7fa;
+    --accent-red-bg: #ffebee;
+    --border-radius: 8px;
+    --shadow-sm: 0 2px 5px rgba(0,0,0,0.05);
+    --shadow: 0 4px 10px rgba(0,0,0,0.05);
+    --shadow-lg: 0 5px 15px rgba(0,0,0,0.15);
+}
+
+/* Base font family used across all pages */
+body {
+    font-family: 'Onest', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+    color: var(--dark-text);
+    /* Global subtle background shared across site */
+    background: linear-gradient(45deg, var(--bg-gradient-1), var(--bg-gradient-2), var(--bg-gradient-1));
+    background-size: 200% 200%;
+    animation: body-gradient-animation 20s ease infinite;
+}
+
+@keyframes body-gradient-animation {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Common container width helper */
+.container {
+    width: 90%;
+    max-width: 1100px;
+    margin: 0 auto;
+    overflow: hidden; /* avoid accidental overflow in grid/columns */
+}
+
+/* Common button styles */
+.btn {
+    display: inline-block;
+    background: var(--primary-color);
+    color: var(--surface);
+    padding: 10px 20px;
+    text-decoration: none;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: transform 0.15s ease-out, box-shadow 0.15s ease-out, background-color 0.15s ease;
+}
+
+.btn:hover { transform: translateY(-2px); box-shadow: 0 6px 12px rgba(0,0,0,0.08); }
+
+/* Small button variant */
+.btn-small { padding: 6px 8px; font-size: 0.9rem; }
+
+/* Common badge */
+.badge {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 12px;
+    background: var(--light-bg);
+    color: var(--dark-text);
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+/* Shared card look */
+.card {
+    background: var(--surface);
+    padding: 1.5rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+}
+
+/* Sidebar base to keep look consistent */
+.sidebar {
+    background: var(--sidebar-bg);
+    color: var(--sidebar-text);
+    padding: 1.5rem;
+}
+
+/* Logo and nav inside sidebar (shared) */
+.sidebar .logo-container { text-align: center; margin-bottom: 2rem; }
+.sidebar .logo { width: 80%; max-width: 150px; background: var(--surface); padding: 10px; border-radius: var(--border-radius); }
+
+/* Unified sidebar list/nav styling - applies to any <ul> inside .sidebar and to .sidebar-nav */
+.sidebar ul,
+.sidebar .sidebar-nav {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar ul li,
+.sidebar .sidebar-nav li { margin: 0; }
+
+.sidebar ul li a,
+.sidebar .sidebar-nav li a {
+    display: block;
+    color: var(--sidebar-text);
+    text-decoration: none;
+    padding: 12px 15px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    font-weight: 500;
+}
+
+.sidebar ul li a:hover,
+.sidebar ul li a.active,
+.sidebar .sidebar-nav li a:hover,
+.sidebar .sidebar-nav li a.active {
+    background: var(--sidebar-hover);
+    color: var(--surface);
+}
+
+/* Mobile toggle defaults (hidden on desktop) */
+.sidebar-toggle { display: none; }
+.sidebar-close { display: none; }
+
+/* Modern hamburger button (desktop hidden, visible on mobile via media queries)
+   Uses simple glyph by default but styled for a consistent look */
+.sidebar-toggle {
+    background: transparent;
+    border: 1px solid transparent;
+    color: var(--dark-text);
+    font-size: 1.4rem; /* glyph size fallback */
+    padding: 8px 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.18s, color 0.18s, transform 0.12s;
+}
+.sidebar-toggle:hover { background: rgba(0,0,0,0.04); transform: translateY(-1px); }
+
+/* Close control inside the sidebar (styled cross) */
+.sidebar-close {
+    background: rgba(0,0,0,0.12);
+    border: none;
+    color: var(--surface);
+    font-size: 1.6rem;
+    width: 44px;
+    height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    cursor: pointer;
+}
+.sidebar-close:hover { background: rgba(0,0,0,0.18); }
+
+/* Utility spacing */
+.mb-2 { margin-bottom: 2rem; }
+
+/* Info card used across admin and client */
+.info-card {
+    background: var(--surface);
+    padding: 1.5rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    border-left: 5px solid var(--primary-color);
+}
+
+/* Equipment card shared base */
+.equipment-card {
+    background: var(--surface);
+    padding: 1.5rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    margin-bottom: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    border-left: 5px solid var(--primary-color);
+}
+
+/* Feature and generic card bases */
+.feature-card {
+    background: var(--surface);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: transform 0.3s ease;
+    text-align: center;
+}
+
+/* Badge variants */
+.badge-success { background: var(--success-color); color: var(--surface); }
+.badge-danger { background: var(--danger-color); color: var(--surface); }
+
+/* Text helpers */
+.text-primary { color: var(--primary-color); }
+.text-right { text-align: right; }
+
+/* Table base */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--surface);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+}
+.table th, .table td { padding: 15px; text-align: left; border-bottom: 1px solid var(--border-color); }
+

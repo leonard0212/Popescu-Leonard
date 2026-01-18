@@ -9,7 +9,7 @@ session_start();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Funcționalități - ServiceHub</title>
+    <title>Funcționalități - ServiceFlow</title>
     <link rel="stylesheet" href="style/main.css">
     <link rel="stylesheet" href="style/pages.css">
 </head>
@@ -18,7 +18,7 @@ session_start();
     <header class="navbar">
         <div class="container">
             <a href="index.php">
-                <img src="assets/images/logo.png" alt="ServiceHub Logo" class="logo">
+                <img src="assets/images/logo.png" alt="ServiceFlow Logo" class="logo">
             </a>
             <nav>
                 <ul class="nav-links">
@@ -43,7 +43,7 @@ session_start();
         <div class="container">
                 <div class="hero-text">
                 <h1 class="section-title">Tot ce ai nevoie pentru un service modern</h1>
-                <p class="hero-subtitle">ServiceHub înlocuiește agendele și fișierele Excel cu o soluție complet digitalizată.</p>
+                <p class="hero-subtitle">ServiceFlow înlocuiește agendele și fișierele Excel cu o soluție complet digitalizată.</p>
             </div>
 
             <div class="features-grid animate-on-scroll">
@@ -89,14 +89,14 @@ session_start();
     <section class="section cta-section">
             <div class="container animate-on-scroll">
             <h2 class="hero-cta-title">Gata să digitalizezi service-ul tău?</h2>
-            <p class="cta-subtitle">Alătură-te comunității ServiceHub astăzi!</p>
+            <p class="cta-subtitle">Alătură-te comunității ServiceFlow astăzi!</p>
             <a href="signup.php" class="btn btn-cta">Începe Acum</a>
         </div>
     </section>
 
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2025 ServiceHub. Toate drepturile rezervate.</p>
+            <p>&copy; 2025 ServiceFlow. Toate drepturile rezervate.</p>
         </div>
     </footer>
 

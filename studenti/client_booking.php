@@ -68,7 +68,7 @@ $vehicles_result = $stmt_veh->get_result();
 
         <main class="client-content">
             <header class="client-header">
-                <button id="sidebar-toggle" class="sidebar-toggle" style="display: none; background: none; border: none; font-size: 1.5rem; cursor: pointer; margin-right: 1rem;">&#9776;</button>
+                <button id="sidebar-toggle" class="sidebar-toggle">&#9776;</button>
                 <h1>Programare Online</h1>
                 <p>Alege serviciul, vehiculul și data dorită.</p>
             </header>

@@ -19,28 +19,51 @@ $vehicle_filter_id = isset($_GET['vehicle_id']) ? (int)$_GET['vehicle_id'] : nul
 
 // Construim interogarea SQL
 // Interogăm tabelul `appointments` și luăm detalii echipament
-$sql = "SELECT a.*, e.model, e.serial_number 
-    FROM appointments a
-    JOIN equipment e ON a.equipment_id = e.id
-    WHERE a.client_id = ?";
+// Vom aduce atât înregistrările din `appointments`, cât și din `interventions`
+// și le vom combina în PHP pentru a le sorta după dată.
 
-// Dacă avem filtru, adăugăm condiția
+$items = [];
+
+// 1) Appointments
+$sqlA = "SELECT a.id, a.appointment_date AS date, 'appointment' AS type, a.description AS description, a.status AS status, e.model, e.serial_number, a.equipment_id FROM appointments a JOIN equipment e ON a.equipment_id = e.id WHERE a.client_id = ?";
+if ($vehicle_filter_id) $sqlA .= " AND a.equipment_id = ?";
+$sqlA .= " ORDER BY a.appointment_date DESC";
+$stmtA = $conn->prepare($sqlA);
 if ($vehicle_filter_id) {
-    $sql .= " AND a.equipment_id = ?";
-}
-
-$sql .= " ORDER BY a.appointment_date DESC";
-
-$stmt = $conn->prepare($sql);
-
-if ($vehicle_filter_id) {
-    $stmt->bind_param("ii", $client_id, $vehicle_filter_id);
+    $stmtA->bind_param("ii", $client_id, $vehicle_filter_id);
 } else {
-    $stmt->bind_param("i", $client_id);
+    $stmtA->bind_param("i", $client_id);
+}
+$stmtA->execute();
+$resA = $stmtA->get_result();
+while($r = $resA->fetch_assoc()) {
+    $items[] = $r;
 }
 
-$stmt->execute();
-$result = $stmt->get_result();
+// 2) Interventions (created by admin or via appointments)
+$sqlI = "SELECT i.id, i.scheduled_date AS date, 'intervention' AS type, i.problem_description AS description, i.status AS status, e.model, e.serial_number, i.equipment_id FROM interventions i JOIN equipment e ON i.equipment_id = e.id WHERE i.client_id = ?";
+if ($vehicle_filter_id) $sqlI .= " AND i.equipment_id = ?";
+$sqlI .= " ORDER BY i.scheduled_date DESC";
+$stmtI = $conn->prepare($sqlI);
+if ($vehicle_filter_id) {
+    $stmtI->bind_param("ii", $client_id, $vehicle_filter_id);
+} else {
+    $stmtI->bind_param("i", $client_id);
+}
+$stmtI->execute();
+$resI = $stmtI->get_result();
+while($r = $resI->fetch_assoc()) {
+    $items[] = $r;
+}
+
+// Sortăm toate item-urile după dată descrescător
+usort($items, function($a, $b) {
+    $da = strtotime($a['date']);
+    $db = strtotime($b['date']);
+    return $db <=> $da;
+});
+
+$result = null; // legacy variable used later by template - we will iterate $items instead
 ?>
 
 <!DOCTYPE html>
@@ -60,7 +83,7 @@ $result = $stmt->get_result();
 
         <main class="client-content">
             <header class="client-header animate-on-scroll">
-                <button id="sidebar-toggle" class="sidebar-toggle" style="display: none; background: none; border: none; font-size: 1.5rem; cursor: pointer; margin-right: 1rem;">&#9776;</button>
+                <button id="sidebar-toggle" class="sidebar-toggle">&#9776;</button>
                 <h1>Istoric Service</h1>
                 <p>Vezi toate intervențiile efectuate asupra vehiculelor tale.</p>
                 <?php if($vehicle_filter_id): ?>
@@ -74,7 +97,7 @@ $result = $stmt->get_result();
             </header>
 
             <div class="animate-on-scroll">
-                <?php if ($result->num_rows > 0): ?>
+                <?php if (count($items) > 0): ?>
                     <table class="history-table">
                         <thead>
                             <tr>
@@ -86,14 +109,14 @@ $result = $stmt->get_result();
                             </tr>
                         </thead>
                         <tbody>
-                            <?php while($row = $result->fetch_assoc()): ?>
+                            <?php foreach($items as $row): ?>
                                 <tr>
                                     <td data-label="Data">
-                                        <?php echo date('d.m.Y H:i', strtotime($row['appointment_date'])); ?>
+                                        <?php echo date('d.m.Y H:i', strtotime($row['date'])); ?>
                                     </td>
                                     <td data-label="Vehicul">
                                         <?php echo htmlspecialchars($row['model']); ?>
-                                        <br><small style="color:#888"><?php echo htmlspecialchars($row['serial_number']); ?></small>
+                                        <br><small class="muted-text"><?php echo htmlspecialchars($row['serial_number']); ?></small>
                                     </td>
                                     <td data-label="Descriere">
                                         <?php echo htmlspecialchars(substr($row['description'], 0, 60)) . (strlen($row['description']) > 60 ? '...' : ''); ?>
@@ -108,19 +131,27 @@ $result = $stmt->get_result();
                                             } elseif ($row['status'] === 'rejected') {
                                                 echo '<span class="badge badge-danger">Respinsă</span>';
                                             } else {
-                                                echo '<span class="badge">' . htmlspecialchars($row['status']) . '</span>';
+                                                // Map common intervention statuses
+                                                $map = [
+                                                    'programata' => 'Programată',
+                                                    'in_desfasurare' => 'În Desfășurare',
+                                                    'finalizata' => 'Finalizată',
+                                                    'anulata' => 'Anulată'
+                                                ];
+                                                $label = isset($map[$row['status']]) ? $map[$row['status']] : $row['status'];
+                                                echo '<span class="badge">' . htmlspecialchars($label) . '</span>';
                                             }
                                         ?>
                                     </td>
                                     <td data-label="">
-                                        <a href="client_history_detail.php?id=<?php echo $row['id']; ?>" class="btn btn-sm btn-secondary">Vezi Detalii</a>
+                                        <a href="client_history_detail.php?id=<?php echo $row['id']; ?>&type=<?php echo urlencode($row['type']); ?>" class="btn btn-sm btn-secondary">Vezi Detalii</a>
                                     </td>
                                 </tr>
-                            <?php endwhile; ?>
+                            <?php endforeach; ?>
                         </tbody>
                     </table>
                 <?php else: ?>
-                    <div style="text-align: center; padding: 50px; background: white; border-radius: 8px;">
+                    <div class="empty-state">
                         <p>Nu există nicio intervenție înregistrată.</p>
                         <a href="client_booking.php" class="btn btn-primary">Fă o programare nouă</a>
                     </div>

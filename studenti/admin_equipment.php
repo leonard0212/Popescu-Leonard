@@ -23,10 +23,13 @@ if (isset($_GET['delete_id'])) {
 
 // Listare echipamente + Nume Client (doar pentru clientii adminului)
 $admin_id = $_SESSION['admin_id'];
-$sql = "SELECT e.*, c.full_name FROM equipment e 
-        JOIN clients c ON e.client_id = c.id 
-        WHERE c.admin_id = ?
-        ORDER BY e.created_at DESC";
+$filter = isset($_GET['filter']) ? $_GET['filter'] : '';
+if ($filter === 'itp_expiring') {
+    $sql = "SELECT e.*, c.full_name FROM equipment e JOIN clients c ON e.client_id = c.id WHERE c.admin_id = ? AND e.itp_expiry_date BETWEEN CURDATE() AND DATE_ADD(CURDATE(), INTERVAL 30 DAY) ORDER BY e.itp_expiry_date ASC";
+} else {
+    $sql = "SELECT e.*, c.full_name FROM equipment e JOIN clients c ON e.client_id = c.id WHERE c.admin_id = ? ORDER BY e.created_at DESC";
+}
+
 $stmt = $conn->prepare($sql);
 $stmt->bind_param('i', $admin_id);
 $stmt->execute();
@@ -38,7 +41,7 @@ $result = $stmt->get_result();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Echipamente - ServiceHub</title>
+    <title>Echipamente - ServiceFlow</title>
     <link rel="stylesheet" href="style/main.css">
     <link rel="stylesheet" href="style/admin.css">
 </head>
@@ -48,7 +51,7 @@ $result = $stmt->get_result();
 
         <main class="admin-content">
             <header class="admin-header animate-on-scroll">
-                <button id="sidebar-toggle" class="sidebar-toggle" style="display: none; background: none; border: none; font-size: 1.5rem; cursor: pointer; margin-right: 1rem;">&#9776;</button>
+                <button id="sidebar-toggle" class="sidebar-toggle">&#9776;</button>
                 <h1>Parc Auto / Echipamente</h1>
                 <a href="admin_equipment_new.php" class="btn btn-primary">Adaugă Echipament</a>
             </header>

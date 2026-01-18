@@ -2,7 +2,7 @@
 $current_page = basename($_SERVER['PHP_SELF']);
 ?>
 <aside class="sidebar" id="sidebar">
-    <button id="sidebar-close" class="sidebar-close" style="display: none;">&times;</button>
+    <button id="sidebar-close" class="sidebar-close">&times;</button>
     <div class="logo-container">
         <?php
             $logo_src = "assets/images/logo.png";
@@ -37,6 +37,10 @@ $current_page = basename($_SERVER['PHP_SELF']);
             </li>
             <li>
                 <a href="admin_intervention_new.php" <?php if($current_page === 'admin_intervention_new.php') echo 'class="active"'; ?>>&nbsp;&nbsp;<i class="fas fa-level-up-alt fa-rotate-90"></i> Adaugă Intervenție</a>
+            </li>
+
+            <li>
+                <a href="issued_invoices.php" <?php if($current_page === 'issued_invoices.php') echo 'class="active"'; ?>>Facturi Emise</a>
             </li>
 
             <li><a href="admin_marketing.php" <?php if($current_page === 'admin_marketing.php') echo 'class="active"'; ?>>Comunicare &amp; Marketing</a></li>

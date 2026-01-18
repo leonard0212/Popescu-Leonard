@@ -142,7 +142,7 @@ function build_calendar($month, $year, $events) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calendar Programări - Admin ServiceHub</title>
+    <title>Calendar Programări - Admin ServiceFlow</title>
     <link rel="stylesheet" href="style/main.css">
     <link rel="stylesheet" href="style/admin.css">
     
@@ -155,7 +155,7 @@ function build_calendar($month, $year, $events) {
 
         <main class="admin-content">
             <header class="admin-header animate-on-scroll">
-                <button id="sidebar-toggle" class="sidebar-toggle" style="display: none; background: none; border: none; font-size: 1.5rem; cursor: pointer; margin-right: 1rem;">&#9776;</button>
+                <button id="sidebar-toggle" class="sidebar-toggle">&#9776;</button>
                 <h1>Calendar Programări</h1>
                 <a href="admin_intervention_new.php" class="btn btn-primary">Adaugă Programare</a>
             </header>

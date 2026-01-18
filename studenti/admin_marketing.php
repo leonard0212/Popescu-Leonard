@@ -152,9 +152,10 @@ $current_smtp = $stmt_current_smtp->get_result()->fetch_assoc();
 <html lang="ro">
 <head>
     <meta charset="UTF-8">
-    <title>Marketing - Admin ServiceHub</title>
+    <title>Marketing - Admin ServiceFlow</title>
     <link rel="stylesheet" href="style/main.css">
     <link rel="stylesheet" href="style/admin.css">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
     <style>
         /* Stiluri pentru zona de setări */
         .smtp-box {
@@ -240,6 +241,27 @@ $current_smtp = $stmt_current_smtp->get_result()->fetch_assoc();
             border-style: solid;
             border-color: #333 transparent transparent transparent;
         }
+
+        /* Responsive improvements for marketing page on small screens */
+        @media (max-width: 768px) {
+            .toggle-btn {
+                width: 100%;
+                text-align: left;
+            }
+            .smtp-box {
+                padding: 12px;
+            }
+            .form-row {
+                flex-direction: column !important;
+            }
+            .smtp-box input, .smtp-box textarea, .admin-form .form-group input, .admin-form .form-group select, .admin-form .form-group textarea {
+                font-size: 1rem;
+            }
+            .btn {
+                width: 100%;
+                box-sizing: border-box;
+            }
+        }
     </style>
     <script>
         function toggleSmtp() {
@@ -258,12 +280,12 @@ $current_smtp = $stmt_current_smtp->get_result()->fetch_assoc();
 
         <main class="admin-content">
             <header class="admin-header animate-on-scroll">
-                <button id="sidebar-toggle" class="sidebar-toggle" style="display: none; background: none; border: none; font-size: 1.5rem; cursor: pointer; margin-right: 1rem;">&#9776;</button>
+                <button id="sidebar-toggle" class="sidebar-toggle">&#9776;</button>
                 <h1>Comunicare & Marketing</h1>
             </header>
 
             <?php if($msg): ?>
-                <div style="padding: 15px; margin-bottom: 20px; border-radius: 5px; color: white; background-color: <?php echo ($msg_type == 'success') ? '#28a745' : '#dc3545'; ?>;">
+                <div class="form-alert <?php echo ($msg_type == 'success') ? 'alert-success' : 'alert-danger'; ?>">
                     <?php echo $msg; ?>
                 </div>
             <?php endif; ?>
@@ -283,13 +305,13 @@ $current_smtp = $stmt_current_smtp->get_result()->fetch_assoc();
                         <input type="text" name="smtp_host" value="<?php echo htmlspecialchars($current_smtp['smtp_host'] ?? 'smtp.gmail.com'); ?>" required>
                     </div>
                     
-                    <div class="form-row" style="display:flex; gap:10px;">
-                        <div class="form-group" style="flex:1;">
+                    <div class="form-row">
+                        <div class="form-group flex-1">
                             <label>User Email</label>
                             <input type="email" name="smtp_user" value="<?php echo htmlspecialchars($current_smtp['smtp_user'] ?? ''); ?>" placeholder="adresa.ta@gmail.com" required>
                         </div>
                         
-                        <div class="form-group" style="flex:1;">
+                        <div class="form-group flex-1">
                             <label>
                                 Parolă (App Password)
                                 <div class="tooltip-wrapper">
@@ -301,7 +323,7 @@ $current_smtp = $stmt_current_smtp->get_result()->fetch_assoc();
                                         2. Activează <strong>2-Step Verification</strong>.<br>
                                         3. Caută opțiunea <strong>"App Passwords"</strong>.<br>
                                         4. Generează una nouă (nume: "ServiceApp") și copiaz-o aici.<br>
-                                        <hr style="margin:8px 0; border-color:#555;">
+                                        <hr class="thin-hr">
                                         <strong>Port recomandat:</strong> 587
                                     </div>
                                 </div>
@@ -309,7 +331,7 @@ $current_smtp = $stmt_current_smtp->get_result()->fetch_assoc();
                             <input type="password" name="smtp_pass" value="<?php echo htmlspecialchars($current_smtp['smtp_pass'] ?? ''); ?>" required>
                         </div>
                         
-                        <div class="form-group" style="width:100px;">
+                        <div class="form-group w-100">
                             <label>Port</label>
                             <input type="number" name="smtp_port" value="<?php echo htmlspecialchars($current_smtp['smtp_port'] ?? '587'); ?>">
                         </div>
@@ -319,7 +341,7 @@ $current_smtp = $stmt_current_smtp->get_result()->fetch_assoc();
                 </form>
             </div>
 
-            <section class="admin-form animate-on-scroll" style="margin-bottom: 2rem;">
+            <section class="admin-form animate-on-scroll mb-2">
                 <h2>Creează Campanie Nouă</h2>
                 <form action="" method="POST">
                     <input type="hidden" name="action" value="send_campaign">
@@ -379,7 +401,7 @@ $current_smtp = $stmt_current_smtp->get_result()->fetch_assoc();
                                     <td><?php echo date('d.m.Y H:i', strtotime($row['created_at'])); ?></td>
                                     <td><?php echo htmlspecialchars($row['name']); ?></td>
                                     <td><?php echo htmlspecialchars($row['subject']); ?></td>
-                                    <td><span style="color:#28a745; font-weight:bold;">Trimis</span></td>
+                                    <td><span class="status-sent">Trimis</span></td>
                                 </tr>
                             <?php endwhile; ?>
                         <?php else: ?>

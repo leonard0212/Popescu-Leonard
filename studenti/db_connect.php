@@ -1,9 +1,10 @@
 <?php
 // db_connect.php
-$servername = "localhost";
-$username   = "root";
-$password   = ""; // Implicit în XAMPP este gol
-$dbname     = "service_flow_db";
+// Folosim variabile de mediu când sunt disponibile (utile în container)
+$servername = getenv('DB_HOST') ?: 'localhost';
+$username   = getenv('DB_USER') ?: 'root';
+$password   = getenv('DB_PASS') ?: '';
+$dbname     = getenv('DB_NAME') ?: 'service_flow_db';
 
 // Creare conexiune
 $conn = new mysqli($servername, $username, $password, $dbname);

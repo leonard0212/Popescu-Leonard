@@ -2,7 +2,7 @@
 $current_page = basename($_SERVER['PHP_SELF']);
 ?>
 <aside class="sidebar client-nav" id="sidebar">
-    <button id="sidebar-close" class="sidebar-close" style="display: none;">&times;</button>
+    <button id="sidebar-close" class="sidebar-close">&times;</button>
     <div class="logo-container">
         <img src="assets/images/logo.png" alt="Logo Service" class="logo">
     </div>

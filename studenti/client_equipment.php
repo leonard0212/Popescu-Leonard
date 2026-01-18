@@ -39,7 +39,7 @@ $result = $stmt->get_result();
 
         <main class="client-content">
             <header class="client-header animate-on-scroll">
-                <button id="sidebar-toggle" class="sidebar-toggle" style="display: none; background: none; border: none; font-size: 1.5rem; cursor: pointer; margin-right: 1rem;">&#9776;</button>
+                <button id="sidebar-toggle" class="sidebar-toggle">&#9776;</button>
                 <h1>Echipamentele Mele</h1>
                 <p>Vezi detalii, garanții și istoricul de service pentru fiecare vehicul.</p>
             </header>

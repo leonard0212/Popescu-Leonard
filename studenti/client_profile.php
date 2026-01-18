@@ -95,13 +95,13 @@ $client = $stmt->get_result()->fetch_assoc();
 
         <main class="client-content">
             <header class="client-header">
-                <button id="sidebar-toggle" class="sidebar-toggle" style="display: none; background: none; border: none; font-size: 1.5rem; cursor: pointer; margin-right: 1rem;">&#9776;</button>
+                <button id="sidebar-toggle" class="sidebar-toggle">&#9776;</button>
                 <h1>Profilul Meu</h1>
                 <p>Actualizează-ți datele de contact și parola.</p>
             </header>
 
             <?php if($msg): ?>
-                <div style="padding: 15px; margin-bottom: 20px; border-radius: 5px; color: white; background-color: <?php echo ($msg_type == 'success') ? '#28a745' : '#dc3545'; ?>;">
+                <div class="<?php echo ($msg_type == 'success') ? 'alert-success' : 'alert-error'; ?>">
                     <?php echo $msg; ?>
                 </div>
             <?php endif; ?>
@@ -132,9 +132,9 @@ $client = $stmt->get_result()->fetch_assoc();
                 <button type="submit" class="btn btn-primary">Salvează Datele de Contact</button>
             </form>
 
-            <form class="booking-form" style="margin-top: 2rem;" action="" method="POST">
+            <form class="booking-form mt-2" action="" method="POST">
                 <input type="hidden" name="update_pass" value="1">
-                <h2 style="margin-bottom: 1.5rem;">Schimbare Parolă</h2>
+                <h2 class="mb-1-5">Schimbare Parolă</h2>
                 
                 <div class="form-group">
                     <label for="pass_new">Parola Nouă</label>

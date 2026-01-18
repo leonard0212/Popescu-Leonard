@@ -60,20 +60,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Creează Cont Nou - ServiceHub</title>
+    <title>Creează Cont Nou - ServiceFlow</title>
     <link rel="stylesheet" href="style/main.css">
 </head>
 <body id="top">
     <div class="form-container animate-on-scroll">
-        <div style="text-align: center; margin-bottom: 1.5rem;">
+        <div class="form-logo">
             <a href="index.php">
-                <img src="assets/images/logo.png" alt="ServiceHub Logo" style="height: 60px;">
+                <img src="assets/images/logo.png" alt="ServiceFlow Logo">
             </a>
         </div>
         <h1>Creează-ți contul de service</h1>
         
         <?php if($error): ?>
-            <div style="background-color: #f8d7da; color: #721c24; padding: 10px; border-radius: 5px; margin-bottom: 15px; text-align: center;">
+            <div class="form-alert alert-danger">
                 <?php echo $error; ?>
             </div>
         <?php endif; ?>

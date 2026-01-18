@@ -41,24 +41,44 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $check_col = $conn->query("SHOW COLUMNS FROM clients LIKE 'password_hash'");
         
         if($check_col->num_rows > 0) {
-            $stmt_client = $conn->prepare("SELECT id, password_hash, full_name FROM clients WHERE email = ?");
+            $stmt_client = $conn->prepare("SELECT c.id, c.password_hash, c.full_name, c.admin_id, a.service_name
+                                            FROM clients c
+                                            LEFT JOIN admins a ON a.id = c.admin_id
+                                            WHERE c.email = ?");
             $stmt_client->bind_param("s", $email);
             $stmt_client->execute();
             $result_client = $stmt_client->get_result();
 
-            if ($result_client->num_rows === 1) {
-                $client = $result_client->fetch_assoc();
-                // Check if client has a password set
-                if (!empty($client['password_hash']) && password_verify($password, $client['password_hash'])) {
-                    // Client Login Successful
-                    $_SESSION['client_id'] = $client['id'];
-                    $_SESSION['client_name'] = $client['full_name'];
+            if ($result_client->num_rows >= 1) {
+                $candidates = [];
+                while ($row = $result_client->fetch_assoc()) {
+                    if (!empty($row['password_hash']) && password_verify($password, $row['password_hash'])) {
+                        $candidates[] = [
+                            'client_id' => (int)$row['id'],
+                            'admin_id' => (int)$row['admin_id'],
+                            'client_name' => $row['full_name'],
+                            'service_name' => $row['service_name'] ?? 'Service'
+                        ];
+                    }
+                }
+
+                if (count($candidates) === 1) {
+                    $sel = $candidates[0];
+                    $_SESSION['client_id'] = $sel['client_id'];
+                    $_SESSION['client_name'] = $sel['client_name'];
+                    $_SESSION['admin_id'] = $sel['admin_id'];
                     $_SESSION['role'] = 'client';
 
                     header("Location: client_dashboard.php");
                     exit();
+                } elseif (count($candidates) > 1) {
+                    // Multiple valid client accounts with same email/password across services
+                    // Store candidates in a temporary session key and redirect to selection
+                    $_SESSION['login_candidates'] = $candidates;
+                    header('Location: select_service.php');
+                    exit();
                 } else {
-                    $error = "Date de autentificare incorecte sau contul nu are o parolă setată.";
+                    $error = "Parolă incorectă pentru contul client sau contul nu are parolă setată.";
                 }
             } else {
                 $error = "Nu există un cont cu acest email.";
@@ -76,26 +96,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Autentificare - ServiceHub</title>
+    <title>Autentificare - ServiceFlow</title>
     <link rel="stylesheet" href="style/main.css">
 </head>
 <body id="top">
     <div class="form-container animate-on-scroll">
-        <div style="text-align: center; margin-bottom: 1.5rem;">
+        <div class="form-logo">
             <a href="index.php">
-                <img src="assets/images/logo.png" alt="ServiceHub Logo" class="login-logo">
+                <img src="assets/images/logo.png" alt="ServiceFlow Logo" class="login-logo">
             </a>
         </div>
         <h1>Autentificare</h1>
         
         <?php if($success): ?>
-            <div style="background-color: #d4edda; color: #155724; padding: 10px; border-radius: 5px; margin-bottom: 15px; text-align: center;">
+                <div class="form-alert alert-success">
                 <?php echo $success; ?>
             </div>
         <?php endif; ?>
 
         <?php if($error): ?>
-            <div style="background-color: #f8d7da; color: #721c24; padding: 10px; border-radius: 5px; margin-bottom: 15px; text-align: center;">
+                <div class="form-alert alert-danger">
                 <?php echo $error; ?>
             </div>
         <?php endif; ?>

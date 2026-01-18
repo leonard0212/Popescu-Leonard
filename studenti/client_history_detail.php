@@ -56,9 +56,9 @@ $data = $result->fetch_assoc();
         <?php include 'client_sidebar.php'; ?>
 
         <main class="client-content">
-            <header class="client-header" style="margin-bottom: 20px;">
-                <button id="sidebar-toggle" class="sidebar-toggle" style="display: none; background: none; border: none; font-size: 1.5rem; cursor: pointer; margin-right: 1rem;">&#9776;</button>
-                <div style="display:inline-block">
+            <header class="client-header">
+                <button id="sidebar-toggle" class="sidebar-toggle">&#9776;</button>
+                <div class="inline-block">
                     <a href="client_history.php" class="btn btn-secondary">&larr; Înapoi</a>
                 </div>
             </header>
@@ -100,7 +100,7 @@ $data = $result->fetch_assoc();
                         <?php if(!empty($data['diagnostic_notes'])): ?>
                         <div class="detail-item full-width">
                             <label>Diagnostic & Note Mecanic</label>
-                            <div style="color: #0056b3;"><?php echo nl2br(htmlspecialchars($data['diagnostic_notes'])); ?></div>
+                            <div class="highlight-blue"><?php echo nl2br(htmlspecialchars($data['diagnostic_notes'])); ?></div>
                         </div>
                         <?php endif; ?>
 
