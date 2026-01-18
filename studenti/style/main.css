@@ -52,10 +52,22 @@ body {
 }
 
 .navbar .logo {
-    height: 50px; /* Fixed height for logo */
+    height: 50px; /* header logo height */
 }
 
-/* Login Logo */
+/* Form logos: match sidebar logo appearance for consistent look */
+.form-logo img {
+    width: 80%;
+    max-width: 150px;
+    display: block;
+    margin: 0 auto 1.5rem auto;
+    background: var(--surface);
+    padding: 10px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-sm);
+}
+
+/* Login-specific small override to keep proportion */
 .login-logo {
     max-width: 150px;
     width: 100%;
@@ -124,7 +136,6 @@ body {
 
 /* Form/logo helpers and alerts */
 .form-logo { text-align: center; margin-bottom: 1.5rem; }
-.form-logo img { height: 60px; }
 .form-alert { text-align: center; margin-bottom: 15px; padding: 10px; border-radius: 5px; }
 .icon-large { font-size: 3rem; margin-bottom: 10px; }
 .inline-block { display: inline-block; }
@@ -419,6 +430,8 @@ body {
     .navbar .logo {
         height: 40px;
     }
+    .form-logo img { max-width: 140px; }
+    .login-logo { max-width: 130px; }
     .hero h1 {
         font-size: 1.8rem;
     }

@@ -1,0 +1,86 @@
+/* Dedicated styles for studenti/features.php - desktop-focused improvements */
+
+:root{
+    --primary-color: #2c7be5;
+    --muted: #6b7280;
+    --card-bg: #ffffff;
+}
+
+/* Make hero more prominent on wide screens */
+.hero-text{
+    max-width: 980px;
+    margin: 48px auto 24px;
+    text-align: center;
+    padding: 12px 20px;
+}
+
+.hero-text .section-title{
+    font-size: 2.25rem;
+    line-height: 1.1;
+    margin-bottom: 8px;
+}
+
+.hero-subtitle{ color: var(--muted); font-size:1.05rem; }
+
+/* Features grid: 3 columns on desktop, 2 on tablet, 1 on small */
+.features-grid{
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+    margin-top: 28px;
+    justify-items: center;
+    align-items: start;
+}
+
+.feature-card{
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 22px;
+    box-shadow: 0 6px 18px rgba(18,24,40,0.06);
+    transition: transform .18s ease, box-shadow .18s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    max-width: 340px;
+    min-width: 240px;
+    width: 100%;
+    min-height: 300px;
+}
+
+.feature-card:hover{ transform: translateY(-6px); box-shadow: 0 12px 30px rgba(18,24,40,0.08); }
+
+.feature-illustration{ font-size: 22px; margin: 0 0 14px; color: var(--primary-color); width:64px; height:64px; line-height:64px; }
+
+.feature-card h3{ margin: 0 0 8px; font-size: 1.06rem; }
+.feature-card p{ margin: 0; color: var(--muted); }
+
+/* CTA section improvements */
+.cta-section{ background: linear-gradient(90deg, #f8fbff, #ffffff); padding: 36px 20px; }
+.hero-cta-title{ font-size: 1.6rem; margin-bottom: 8px; }
+.btn-cta{ padding: 12px 20px; font-weight:600; }
+
+/* Navbar tweaks for desktop */
+.navbar .container{ display:flex; align-items:center; justify-content:space-between; gap:12px; }
+.nav-links{ margin:0; padding:0; list-style:none; }
+.nav-links li{ display:inline-block; margin-right:16px; }
+.nav-links a{ color: #111827; text-decoration:none; padding:6px 4px; }
+
+.container{ max-width:1100px; margin:0 auto; padding:0 20px; }
+
+/* Responsive breakpoints */
+@media (min-width:700px){
+    .features-grid{ grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (min-width:1100px){
+    .hero-text{ padding: 36px 10px 10px; }
+    .features-grid{ grid-template-columns: repeat(3, 1fr); gap:28px; }
+    .feature-card{ padding:28px; }
+}
+
+/* Small visual polish */
+.back-to-top{ right:20px; }
+
+/* Ensure icons align nicely inside illustrations */
+.feat-ill-1 i, .feat-ill-2 i, .feat-ill-3 i, .feat-ill-4 i, .feat-ill-5 i, .feat-ill-6 i{ display:inline-block; width:44px; height:44px; line-height:44px; text-align:center; border-radius:8px; background: rgba(44,123,229,0.08); color: var(--primary-color); }

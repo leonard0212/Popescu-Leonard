@@ -18,10 +18,10 @@ if (empty($intervention_id) && isset($_POST['intervention_id'])) $intervention_i
 $msg = '';
 $existing_invoice = null;
 
-// Load invoice if provided
+// Load invoice if provided (ensure it belongs to this admin)
 if ($invoice_id) {
-    $invq = $conn->prepare("SELECT * FROM invoices WHERE id = ? LIMIT 1");
-    $invq->bind_param('i', $invoice_id);
+    $invq = $conn->prepare("SELECT * FROM invoices WHERE id = ? AND admin_id = ? LIMIT 1");
+    $invq->bind_param('ii', $invoice_id, $admin_id);
     $invq->execute();
     $invres = $invq->get_result();
     if ($invres && $invres->num_rows) {
@@ -32,7 +32,7 @@ if ($invoice_id) {
             exit();
         }
     } else {
-        die('Factura inexistentă.');
+        die('Factura inexistentă sau acces interzis.');
     }
 }
 
@@ -57,10 +57,10 @@ $adm->execute();
 $admin_data = $adm->get_result()->fetch_assoc() ?: [];
 $default_vat = isset($admin_data['vat_rate_default']) ? (float)$admin_data['vat_rate_default'] : 19.0;
 
-// If no existing invoice, check for invoice by intervention
+// If no existing invoice, check for invoice by intervention (for this admin only)
 if (empty($existing_invoice)) {
-    $chk = $conn->prepare("SELECT * FROM invoices WHERE intervention_id = ? LIMIT 1");
-    $chk->bind_param('i', $intervention_id);
+    $chk = $conn->prepare("SELECT * FROM invoices WHERE intervention_id = ? AND admin_id = ? LIMIT 1");
+    $chk->bind_param('ii', $intervention_id, $admin_id);
     $chk->execute();
     $res_chk = $chk->get_result();
     if ($res_chk && $res_chk->num_rows > 0) {
@@ -107,14 +107,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $msg = 'ATENȚIE: Total calculat = 0. Verificați valorile trimise.';
     }
 
-    $inv_number = 'INV-' . date('Ymd') . '-' . $intervention_id;
     $is_pub = ($action === 'publish') ? 1 : 0;
 
     // Only perform DB write if total > 0
     if ($total > 0) {
         if ($existing_invoice) {
-            $up = $conn->prepare("UPDATE invoices SET invoice_number = ?, amount = ?, details = ?, parts_amount = ?, labor_amount = ?, vat_rate = ?, is_published = ? WHERE id = ?");
-            $up->bind_param('sdsdddii', $inv_number, $total, $details, $parts, $labor, $vat, $is_pub, $existing_invoice['id']);
+            // keep existing invoice_number when editing
+            $inv_number = $existing_invoice['invoice_number'];
+            // ensure update only affects this admin's invoice
+            $up = $conn->prepare("UPDATE invoices SET invoice_number = ?, amount = ?, details = ?, parts_amount = ?, labor_amount = ?, vat_rate = ?, is_published = ? WHERE id = ? AND admin_id = ?");
+            $up->bind_param('sdsdddiii', $inv_number, $total, $details, $parts, $labor, $vat, $is_pub, $existing_invoice['id'], $admin_id);
             if ($up->execute()) {
                 $invoice_id = $existing_invoice['id'];
                 if ($is_pub) {
@@ -141,29 +143,62 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $msg = 'Eroare actualizare: ' . $conn->error;
             }
         } else {
-            $ins = $conn->prepare("INSERT INTO invoices (admin_id, client_id, intervention_id, invoice_number, amount, invoice_date, details, parts_amount, labor_amount, vat_rate, is_published) VALUES (?, ?, ?, ?, ?, CURDATE(), ?, ?, ?, ?, ?)");
-            if ($ins) {
-                $ins->bind_param('iiisdsdddi', $admin_id, $inter['client_id'], $intervention_id, $inv_number, $total, $details, $parts, $labor, $vat, $is_pub);
-                if ($ins->execute()) {
-                    $new_id = $ins->insert_id;
-                    if ($is_pub) {
-                        $points = floor($total / 10);
-                        if ($points > 0) {
-                            $upd = $conn->prepare("UPDATE clients SET loyalty_points = IFNULL(loyalty_points,0) + ? WHERE id = ?");
-                            $upd->bind_param('ii', $points, $inter['client_id']);
-                            $upd->execute();
-                        }
-                        $mark = $conn->prepare("UPDATE interventions SET points_awarded = 1 WHERE id = ?");
-                        $mark->bind_param('i', $intervention_id);
-                        $mark->execute();
-                    }
-                    header('Location: admin_invoice.php?invoice_id=' . (int)$new_id);
-                    exit();
+            // Create new invoice: allocate per-admin sequential number inside a transaction
+            try {
+                $conn->begin_transaction();
+
+                // Lock and read sequence row
+                $seq_select = $conn->prepare("SELECT last_seq FROM invoice_sequences WHERE admin_id = ? FOR UPDATE");
+                $seq_select->bind_param('i', $admin_id);
+                $seq_select->execute();
+                $seq_res = $seq_select->get_result();
+                if ($seq_res && $seq_res->num_rows) {
+                    $rowseq = $seq_res->fetch_assoc();
+                    $new_seq = (int)$rowseq['last_seq'] + 1;
+                    $seq_up = $conn->prepare("UPDATE invoice_sequences SET last_seq = ? WHERE admin_id = ?");
+                    $seq_up->bind_param('ii', $new_seq, $admin_id);
+                    $seq_up->execute();
                 } else {
-                    $msg = 'Eroare insert: ' . $conn->error;
+                    $new_seq = 1;
+                    $seq_ins = $conn->prepare("INSERT INTO invoice_sequences (admin_id, last_seq) VALUES (?, ?) ");
+                    $seq_ins->bind_param('ii', $admin_id, $new_seq);
+                    $seq_ins->execute();
                 }
-            } else {
-                $msg = 'Eroare internă pregătire interogare.';
+
+                // Build invoice number: INV-<admin_id>-<seq padded to 4>
+                $inv_number = 'INV-' . $admin_id . '-' . str_pad((string)$new_seq, 4, '0', STR_PAD_LEFT);
+
+                $ins = $conn->prepare("INSERT INTO invoices (admin_id, client_id, intervention_id, invoice_number, amount, invoice_date, details, parts_amount, labor_amount, vat_rate, is_published) VALUES (?, ?, ?, ?, ?, CURDATE(), ?, ?, ?, ?, ?)");
+                if ($ins) {
+                    $ins->bind_param('iiisdsdddi', $admin_id, $inter['client_id'], $intervention_id, $inv_number, $total, $details, $parts, $labor, $vat, $is_pub);
+                    if ($ins->execute()) {
+                        $new_id = $ins->insert_id;
+                        // commit transaction (sequence + invoice)
+                        $conn->commit();
+                        if ($is_pub) {
+                            $points = floor($total / 10);
+                            if ($points > 0) {
+                                $upd = $conn->prepare("UPDATE clients SET loyalty_points = IFNULL(loyalty_points,0) + ? WHERE id = ?");
+                                $upd->bind_param('ii', $points, $inter['client_id']);
+                                $upd->execute();
+                            }
+                            $mark = $conn->prepare("UPDATE interventions SET points_awarded = 1 WHERE id = ?");
+                            $mark->bind_param('i', $intervention_id);
+                            $mark->execute();
+                        }
+                        header('Location: admin_invoice.php?invoice_id=' . (int)$new_id);
+                        exit();
+                    } else {
+                        $conn->rollback();
+                        $msg = 'Eroare insert: ' . $conn->error;
+                    }
+                } else {
+                    $conn->rollback();
+                    $msg = 'Eroare internă pregătire interogare.';
+                }
+            } catch (Exception $e) {
+                $conn->rollback();
+                $msg = 'Eroare tranzacție: ' . $e->getMessage();
             }
         }
     } else {

@@ -12,6 +12,7 @@ session_start();
     <title>Funcționalități - ServiceFlow</title>
     <link rel="stylesheet" href="style/main.css">
     <link rel="stylesheet" href="style/pages.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-pQQ6XQJ6Yf1q1w9s3QYq6f7x0Z9sVq5n1Q6Y8e0Y1J7r9Y6Z0a1s2b3c4d5e6f7g8h9i0j1k2l3m4n5o6p7q==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body id="top">
 

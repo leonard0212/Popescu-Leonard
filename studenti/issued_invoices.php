@@ -12,17 +12,18 @@ if (empty($_SESSION['admin_id'])) {
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST['action']) && !empty($_POST['invoice_id'])) {
     $act = $_POST['action'];
     $iid = (int)$_POST['invoice_id'];
+    // Only allow acting on invoices that belong to this admin
     if ($act === 'publish') {
-        $u = $conn->prepare("UPDATE invoices SET is_published = 1, invoice_date = CURDATE() WHERE id = ? LIMIT 1");
-        $u->bind_param('i', $iid);
+        $u = $conn->prepare("UPDATE invoices SET is_published = 1, invoice_date = CURDATE() WHERE id = ? AND admin_id = ? LIMIT 1");
+        $u->bind_param('ii', $iid, $_SESSION['admin_id']);
         $u->execute();
     } elseif ($act === 'unpublish') {
-        $u = $conn->prepare("UPDATE invoices SET is_published = 0 WHERE id = ? LIMIT 1");
-        $u->bind_param('i', $iid);
+        $u = $conn->prepare("UPDATE invoices SET is_published = 0 WHERE id = ? AND admin_id = ? LIMIT 1");
+        $u->bind_param('ii', $iid, $_SESSION['admin_id']);
         $u->execute();
     } elseif ($act === 'delete') {
-        $d = $conn->prepare("DELETE FROM invoices WHERE id = ? LIMIT 1");
-        $d->bind_param('i', $iid);
+        $d = $conn->prepare("DELETE FROM invoices WHERE id = ? AND admin_id = ? LIMIT 1");
+        $d->bind_param('ii', $iid, $_SESSION['admin_id']);
         $d->execute();
     }
     // Redirect to avoid re-submission
@@ -32,16 +33,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST['action']) && !empty(
     exit();
 }
 
-// Determine filter: issued / draft / all
+// Determine filter: issued / draft / all, but always restrict to current admin
+$admin_id = (int)$_SESSION['admin_id'];
 $status = isset($_GET['status']) ? $_GET['status'] : 'issued';
-$where = '';
+$where = 'WHERE i.admin_id = ?';
 if ($status === 'draft') {
-    $where = 'WHERE i.is_published = 0';
+    $where .= ' AND i.is_published = 0';
 } elseif ($status === 'issued') {
-    $where = 'WHERE i.is_published = 1';
-} else {
-    $where = ''; // all
-}
+    $where .= ' AND i.is_published = 1';
+} // 'all' -> keep only admin's invoices
 
 $sql = "SELECT i.*, c.full_name AS client_name, a.email AS admin_email, interv.problem_description AS intervention_desc
         FROM invoices i
@@ -51,7 +51,13 @@ $sql = "SELECT i.*, c.full_name AS client_name, a.email AS admin_email, interv.p
         $where
         ORDER BY i.invoice_date DESC, i.id DESC";
 
-$res = isset($conn) ? $conn->query($sql) : false;
+$stmt = $conn->prepare($sql);
+$res = false;
+if ($stmt) {
+    $stmt->bind_param('i', $admin_id);
+    $stmt->execute();
+    $res = $stmt->get_result();
+}
 ?>
 <!doctype html>
 <html>

@@ -11,17 +11,17 @@ $admin_id = $_SESSION['admin_id'];
 $intervention_id = isset($_GET['intervention_id']) ? (int)$_GET['intervention_id'] : 0;
 $invoice_id = isset($_GET['invoice_id']) ? (int)$_GET['invoice_id'] : 0;
 
-// If called with invoice_id, resolve associated intervention
+// If called with invoice_id, resolve associated intervention and verify admin ownership
 if ($invoice_id && empty($intervention_id)) {
-    $qi = $conn->prepare("SELECT intervention_id FROM invoices WHERE id = ? LIMIT 1");
-    $qi->bind_param('i', $invoice_id);
+    $qi = $conn->prepare("SELECT intervention_id FROM invoices WHERE id = ? AND admin_id = ? LIMIT 1");
+    $qi->bind_param('ii', $invoice_id, $admin_id);
     $qi->execute();
     $rqi = $qi->get_result();
     if ($rqi && $rqi->num_rows) {
         $rowi = $rqi->fetch_assoc();
         $intervention_id = (int)$rowi['intervention_id'];
     } else {
-        die('Factura inexistentă.');
+        die('Factura inexistentă sau acces interzis.');
     }
 }
 $msg = '';
@@ -44,9 +44,9 @@ if ($res->num_rows === 0) {
 
 $intervention = $res->fetch_assoc();
 
-// Check if invoice already exists
-$chk = $conn->prepare("SELECT * FROM invoices WHERE intervention_id = ?");
-$chk->bind_param("i", $intervention_id);
+// Check if invoice already exists for this admin
+$chk = $conn->prepare("SELECT * FROM invoices WHERE intervention_id = ? AND admin_id = ? LIMIT 1");
+$chk->bind_param("ii", $intervention_id, $admin_id);
 $chk->execute();
 $existing_invoice = $chk->get_result()->fetch_assoc();
 
