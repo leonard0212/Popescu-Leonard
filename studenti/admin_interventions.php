@@ -1,6 +1,8 @@
 <?php
 session_start();
 require_once 'db_connect.php';
+require_once 'auth.php';
+require_admin();
 
 // Security check
 if (!isset($_SESSION['admin_id'])) {

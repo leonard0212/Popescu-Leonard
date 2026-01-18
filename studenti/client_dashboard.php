@@ -80,18 +80,21 @@ $prog_data = $prog_res->fetch_assoc();
     <title>Portalul Meu - Service Auto</title>
     <link rel="stylesheet" href="style/main.css">
     <link rel="stylesheet" href="style/client.css">
+    <link rel="stylesheet" href="style/admin.css">
     <link rel="stylesheet" href="style/pages.css">
 </head>
 <body id="top">
 
-    <div class="client-portal">
+    <div class="admin-wrapper">
         <?php include 'client_sidebar.php'; ?>
 
-        <main class="client-content">
-            <header class="client-header">
+        <main class="admin-content">
+            <header class="admin-header">
                 <button id="sidebar-toggle" class="sidebar-toggle">&#9776;</button>
                 <h1>Bun venit, <?php echo htmlspecialchars($client['full_name']); ?>!</h1>
-                <p>Aici găsești toate informațiile despre vehiculele și programările tale.</p>
+                <div class="user-info">
+                    <p>Aici găsești toate informațiile despre vehiculele și programările tale.</p>
+                </div>
             </header>
 
             <section class="info-card-grid animate-on-scroll">

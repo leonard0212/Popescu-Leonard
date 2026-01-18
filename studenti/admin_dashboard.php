@@ -1,6 +1,8 @@
 <?php
 session_start();
 require_once 'db_connect.php';
+require_once 'auth.php';
+require_admin();
 
 // 1. Verificare securitate
 if (!isset($_SESSION['admin_id'])) {
@@ -182,11 +184,11 @@ if ($pending_stmt) {
                     <div class="value"><a href="admin_interventions.php?filter=in_desfasurare" style="text-decoration:none; color:inherit"><?php echo $vehicule_service; ?></a></div>
                 </div>
                 <div class="widget animate-on-scroll">
-                    <h3>Clienți Noi (Luna)</h3>
+                    <h3>Clienți Noi (Ultima Luna)</h3>
                     <div class="value"><a href="admin_clients.php?filter=new_month" style="text-decoration:none; color:inherit"><?php echo $clienti_noi; ?></a></div>
                 </div>
                 <div class="widget animate-on-scroll">
-                    <h3>ITP-uri ce Expiră (30 zile)</h3>
+                    <h3>ITP-uri ce Expiră (mai putin de 30 zile)</h3>
                     <div class="value" style="color: #ffc107;"><a href="admin_equipment.php?filter=itp_expiring" style="text-decoration:none; color:inherit"><?php echo $itp_expira; ?></a></div>
                 </div>
             </section>

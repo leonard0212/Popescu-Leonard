@@ -58,10 +58,10 @@ session_start();
                 </ul>
             </nav>
             <div>
-                <?php if(isset($_SESSION['admin_id'])): ?>
-                    <a href="admin_dashboard.php" class="btn btn-primary">Panou Admin</a>
-                <?php elseif(isset($_SESSION['client_id'])): ?>
-                    <a href="client_dashboard.php" class="btn btn-primary">Portal Client</a>
+                    <?php if(isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
+                        <a href="admin_dashboard.php" class="btn btn-primary">Panou Admin</a>
+                    <?php elseif(isset($_SESSION['role']) && $_SESSION['role'] === 'client'): ?>
+                        <a href="client_dashboard.php" class="btn btn-primary">Portal Client</a>
                 <?php else: ?>
                     <a href="login.php" class="btn btn-secondary">Autentificare</a>
                     <a href="signup.php" class="btn btn-primary">Creează Cont</a>

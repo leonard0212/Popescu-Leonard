@@ -87,17 +87,20 @@ $client = $stmt->get_result()->fetch_assoc();
     <title>Profilul Meu - Portal Client</title>
     <link rel="stylesheet" href="style/main.css">
     <link rel="stylesheet" href="style/client.css">
+    <link rel="stylesheet" href="style/admin.css">
 </head>
 <body id="top">
     
-    <div class="client-portal">
+    <div class="admin-wrapper">
         <?php include 'client_sidebar.php'; ?>
 
-        <main class="client-content">
-            <header class="client-header">
+        <main class="admin-content">
+            <header class="admin-header">
                 <button id="sidebar-toggle" class="sidebar-toggle">&#9776;</button>
                 <h1>Profilul Meu</h1>
-                <p>Actualizează-ți datele de contact și parola.</p>
+                <div class="user-info">
+                    <p>Actualizează-ți datele de contact și parola.</p>
+                </div>
             </header>
 
             <?php if($msg): ?>

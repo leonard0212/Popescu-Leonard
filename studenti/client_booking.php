@@ -60,17 +60,20 @@ $vehicles_result = $stmt_veh->get_result();
     <title>Programare Online - Portal Client</title>
     <link rel="stylesheet" href="style/main.css">
     <link rel="stylesheet" href="style/client.css">
+    <link rel="stylesheet" href="style/admin.css">
 </head>
 <body id="top">
 
-    <div class="client-portal">
+    <div class="admin-wrapper">
         <?php include 'client_sidebar.php'; ?>
 
-        <main class="client-content">
-            <header class="client-header">
+        <main class="admin-content">
+            <header class="admin-header">
                 <button id="sidebar-toggle" class="sidebar-toggle">&#9776;</button>
                 <h1>Programare Online</h1>
-                <p>Alege serviciul, vehiculul și data dorită.</p>
+                <div class="user-info">
+                    <p>Alege serviciul, vehiculul și data dorită.</p>
+                </div>
             </header>
 
             <?php if($message): ?>

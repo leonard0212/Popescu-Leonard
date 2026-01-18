@@ -31,17 +31,20 @@ $result = $stmt->get_result();
     <link rel="stylesheet" href="style/main.css">
     <link rel="stylesheet" href="style/client.css">
     <link rel="stylesheet" href="style/pages.css">
+    <link rel="stylesheet" href="style/admin.css">
 </head>
 <body id="top">
     
-    <div class="client-portal">
+    <div class="admin-wrapper">
         <?php include 'client_sidebar.php'; ?>
 
-        <main class="client-content">
-            <header class="client-header animate-on-scroll">
+        <main class="admin-content">
+            <header class="admin-header animate-on-scroll">
                 <button id="sidebar-toggle" class="sidebar-toggle">&#9776;</button>
                 <h1>Echipamentele Mele</h1>
-                <p>Vezi detalii, garanții și istoricul de service pentru fiecare vehicul.</p>
+                <div class="user-info">
+                    <p>Vezi detalii, garanții și istoricul de service pentru fiecare vehicul.</p>
+                </div>
             </header>
 
             <div class="equipment-list animate-on-scroll">

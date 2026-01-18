@@ -1,12 +1,8 @@
 <?php
 session_start();
 require_once 'db_connect.php';
-
-// require admin
-if (empty($_SESSION['admin_id'])) {
-    header('Location: login.php');
-    exit();
-}
+require_once 'auth.php';
+require_admin();
 
 // Handle actions: publish / delete
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST['action']) && !empty($_POST['invoice_id'])) {

@@ -49,14 +49,15 @@ $data = $result->fetch_assoc();
     <link rel="stylesheet" href="style/main.css">
     <link rel="stylesheet" href="style/client.css">
     <link rel="stylesheet" href="style/pages.css">
+    <link rel="stylesheet" href="style/admin.css">
 </head>
 <body id="top">
     
-    <div class="client-portal">
+    <div class="admin-wrapper">
         <?php include 'client_sidebar.php'; ?>
 
-        <main class="client-content">
-            <header class="client-header">
+        <main class="admin-content">
+            <header class="admin-header">
                 <button id="sidebar-toggle" class="sidebar-toggle">&#9776;</button>
                 <div class="inline-block">
                     <a href="client_history.php" class="btn btn-secondary">&larr; Înapoi</a>

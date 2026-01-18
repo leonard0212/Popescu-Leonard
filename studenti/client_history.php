@@ -75,25 +75,28 @@ $result = null; // legacy variable used later by template - we will iterate $ite
     <link rel="stylesheet" href="style/main.css">
     <link rel="stylesheet" href="style/client.css">
     <link rel="stylesheet" href="style/pages.css">
+    <link rel="stylesheet" href="style/admin.css">
 </head>
 <body id="top">
     
-    <div class="client-portal">
+    <div class="admin-wrapper">
         <?php include 'client_sidebar.php'; ?>
 
-        <main class="client-content">
-            <header class="client-header animate-on-scroll">
+        <main class="admin-content">
+            <header class="admin-header animate-on-scroll">
                 <button id="sidebar-toggle" class="sidebar-toggle">&#9776;</button>
                 <h1>Istoric Service</h1>
-                <p>Vezi toate intervențiile efectuate asupra vehiculelor tale.</p>
-                <?php if($vehicle_filter_id): ?>
-                    <div class="mb-20">
-                        <span class="filter-badge">
-                            Filtru activ: Arătăm doar istoricul vehiculului selectat
-                            <a href="client_history.php" class="filter-clear">&times; Șterge filtrul</a>
-                        </span>
-                    </div>
-                <?php endif; ?>
+                <div class="user-info">
+                    <p>Vezi toate intervențiile efectuate asupra vehiculelor tale.</p>
+                    <?php if($vehicle_filter_id): ?>
+                        <div class="mb-20">
+                            <span class="filter-badge">
+                                Filtru activ: Arătăm doar istoricul vehiculului selectat
+                                <a href="client_history.php" class="filter-clear">&times; Șterge filtrul</a>
+                            </span>
+                        </div>
+                    <?php endif; ?>
+                </div>
             </header>
 
             <div class="animate-on-scroll">

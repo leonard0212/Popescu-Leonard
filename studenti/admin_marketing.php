@@ -1,6 +1,8 @@
 <?php
 session_start();
 require_once 'db_connect.php';
+require_once 'auth.php';
+require_admin();
 
 // --- INCLUDERE PHPMAILER ---
 // Asigură-te că ai folderul 'libs' cu cele 3 fișiere (Exception.php, PHPMailer.php, SMTP.php)
